@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+	<div class="about-content">
+		<div class="about-text">
+			<h1>Обо мне</h1>
+			<p>Алеся Такун — психолог, гештальт‑консультант, специалист по травме привязанности и нарциссической травме.</p>
+			<p>Работаю со взрослыми индивидуально и веду терапевтические группы. Поддерживаю в разборе непрожитых эмоций и непростых семейных ситуаций, а также в поиске внутренней опоры и устойчивости в жизни.</p>
+		</div>
+		<div class="about-photo">
+			<img src="/Photo/photo.jpg" alt="Алеся Такун" width="250" height="333" loading="lazy" />
+		</div>
+	</div>
+</Layout>
+
+<style>
+.about-content { display: grid; grid-template-columns: 1fr 250px; gap: 32px; align-items: start; margin: 24px 0; }
+.about-photo img { width: 100%; height: auto; border-radius: 12px; object-fit: cover; }
+
+@media (max-width: 768px) {
+	.about-content { grid-template-columns: 1fr; gap: 24px; }
+	.about-photo { order: -1; }
+	.about-photo img { max-width: 200px; margin: 0 auto; display: block; }
+}
+</style>
+

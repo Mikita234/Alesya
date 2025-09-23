@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+        <meta name="generator" content={Astro.generator} />
+        <title>{Astro.props.title || "Алеся Такун — психолог, гештальт-консультант"}</title>
+        <meta name="description" content={Astro.props.description || "Алеся Такун — психолог в Минске, гештальт-консультант. Очный приём и онлайн-консультации. Помощь при КПТСР, эмоциональном выгорании, сложных отношениях, травме привязанности. Запись: +375 29 307 83 42"} />
+        <meta name="keywords" content="психолог Минск, гештальт-терапевт, психолог онлайн, КПТСР, эмоциональное выгорание, травма привязанности, нарциссическая травма, парная терапия, психолог Беларусь" />
+        <meta name="robots" content="index, follow" />
+        <meta name="author" content="Алеся Такун" />
+        <meta name="geo.region" content="BY" />
+        <meta name="geo.placename" content="Минск" />
+        <meta name="geo.position" content="53.9006;27.5590" />
+        <meta name="ICBM" content="53.9006, 27.5590" />
+        
+        <!-- Open Graph -->
+        <meta property="og:title" content="Алеся Такун — психолог в Минске | Гештальт-консультант" />
+        <meta property="og:description" content="Психолог в Минске. Очный приём и онлайн-консультации. Помощь при КПТСР, выгорании, сложных отношениях, травме привязанности. Запись: +375 29 307 83 42" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://mikita234.github.io/Alesya" />
+        <meta property="og:image" content="https://mikita234.github.io/Alesya/Photo/photo.jpg" />
+        <meta property="og:locale" content="ru_BY" />
+        <meta property="og:site_name" content="Алеся Такун — психолог" />
+        
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Алеся Такун — психолог в Минске" />
+        <meta name="twitter:description" content="Гештальт-консультант. Очный приём и онлайн. Помощь при КПТСР, выгорании, сложных отношениях." />
+        <meta name="twitter:image" content="https://mikita234.github.io/Alesya/Photo/photo.jpg" />
+        
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Алеся Такун",
+          "jobTitle": "Психолог, гештальт-консультант",
+          "description": "Психолог в Минске, специалист по травме привязанности и нарциссической травме",
+            "url": "https://mikita234.github.io/Alesya",
+            "image": "https://mikita234.github.io/Alesya/Photo/photo.jpg",
+          "telephone": "+375293078342",
+          "email": "alessia-sia@mail.ru",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BY",
+            "addressRegion": "Гомельская область",
+            "addressLocality": "Сосновый Бор"
+          },
+          "knowsAbout": [
+            "Гештальт-терапия",
+            "Травма привязанности", 
+            "Нарциссическая травма",
+            "КПТСР",
+            "Эмоциональное выгорание",
+            "Парная терапия"
+          ],
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Очный приём",
+              "price": "150",
+              "priceCurrency": "BYN"
+            },
+            {
+              "@type": "Offer", 
+              "name": "Онлайн-консультация",
+              "price": "150",
+              "priceCurrency": "BYN"
+            },
+            {
+              "@type": "Offer",
+              "name": "Парная терапия", 
+              "price": "250",
+              "priceCurrency": "BYN"
+            }
+          ]
+        }
+        </script>
+        
+        <!-- Яндекс.Метрика -->
+        <script type="text/javascript">
+           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+           m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+           (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+           ym(YANDEX_METRIKA_ID, "init", {
+                clickmap:true,
+                trackLinks:true,
+                accurateTrackBounce:true,
+                webvisor:true
+           });
+        </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/YANDEX_METRIKA_ID" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        
+        <!-- Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'GA_MEASUREMENT_ID');
+        </script>
+    </head>
+    <body>
+        <header class="site-header">
+            <nav class="nav">
+                <a class="logo" href={`${import.meta.env.BASE_URL}`}>Алеся Такун</a>
+                <button class="mobile-menu-toggle" aria-label="Открыть меню">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                    <ul class="nav-list">
+                        <li><a href={`${import.meta.env.BASE_URL}`}>Главная</a></li>
+                        <li><a href={`${import.meta.env.BASE_URL}#about`}>Обо мне</a></li>
+                        <li><a href={`${import.meta.env.BASE_URL}#services`}>Услуги</a></li>
+                        <li><a href={`${import.meta.env.BASE_URL}#payments`}>Оплата</a></li>
+                        <li><a href={`${import.meta.env.BASE_URL}oferta/`}>Договор</a></li>
+                    </ul>
+            </nav>
+        </header>
+        <main class="container">
+            <slot />
+        </main>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Алеся Такун</h3>
+                <p>Психолог, гештальт-консультант<br/>Специалист по травме привязанности</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Контакты</h4>
+                <div class="contact-links">
+                    <a href="tel:+375293078342" class="contact-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                        +375 29 307 83 42
+                    </a>
+                    <a href="mailto:alessia-sia@mail.ru" class="contact-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        alessia-sia@mail.ru
+                    </a>
+                    <a href="https://t.me/alesiatakun" target="_blank" class="contact-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                        </svg>
+                        @alesiatakun
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Услуги</h4>
+                <ul class="footer-links">
+                    <li>Индивидуальная консультация</li>
+                    <li>Онлайн-сессии</li>
+                    <li>Парная терапия</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Реквизиты</h4>
+                <p class="footer-text">
+                    ИП Такун Алеся Александровна<br/>
+                    УНП: 491661318<br/>
+                    IBAN: BY80ALFA30132H53520010270000<br/>
+                    Альфа-Банк (Беларусь)
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© {new Date().getFullYear()} Алеся Такун. Все права защищены.</p>
+            <p><a href={`${import.meta.env.BASE_URL}oferta/`}>Договор оферты</a></p>
+        </div>
+    </footer>
+    </body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+:root {
+    --text: #1a1a1a;
+    --text-light: #4a4a4a;
+    --muted: #6b7280;
+    --bg: #fefefe;
+    --bg-alt: #f8fafc;
+    --border: #e5e7eb;
+    --accent: #6366f1;
+    --accent-light: #a5b4fc;
+    --accent-dark: #4f46e5;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+    color: var(--text); 
+    background: var(--bg); 
+    line-height: 1.6;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.site-header { 
+    border-bottom: 1px solid var(--border); 
+    position: sticky; 
+    top: 0; 
+    background: rgba(254, 254, 254, 0.95); 
+    backdrop-filter: blur(10px);
+    z-index: 50; 
+    box-shadow: var(--shadow);
+}
+
+.nav { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 16px 24px; 
+}
+
+.logo { 
+    font-weight: 700; 
+    font-size: 20px;
+    color: var(--text); 
+    text-decoration: none; 
+    transition: var(--transition);
+}
+
+.logo:hover { color: var(--accent); }
+
+.nav-list { 
+    list-style: none; 
+    display: flex; 
+    gap: 8px; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.nav-list a { 
+    color: var(--text-light); 
+    text-decoration: none; 
+    padding: 8px 16px; 
+    border-radius: var(--radius-sm); 
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-list a:hover { 
+    background: var(--bg-alt); 
+    color: var(--accent);
+}
+
+.container { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 24px 80px; 
+}
+
+.site-footer {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #e0e0e0;
+    padding: 0;
+    margin-top: 80px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-section h3 {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.footer-section h4 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+}
+
+.footer-section p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #e0e0e0;
+    text-decoration: none;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.contact-link:hover {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+.contact-link svg {
+    flex-shrink: 0;
+    opacity: 0.8;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    color: #b0b0b0;
+    padding: 4px 0;
+    line-height: 1.5;
+}
+
+.footer-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    background: #0f0f0f;
+    padding: 24px 20px;
+    text-align: center;
+    border-top: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.footer-bottom a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Menu */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    gap: 4px;
+}
+
+.mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    transition: var(--transition);
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .nav-list {
+        position: fixed;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        border-top: 1px solid var(--border);
+        flex-direction: column;
+        padding: 20px;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .nav-list.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 40px 20px 30px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    .nav-list li {
+        margin: 8px 0;
+    }
+    
+    .nav-list a {
+        display: block;
+        padding: 12px 16px;
+        text-align: center;
+        border-radius: var(--radius);
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const navList = document.querySelector('.nav-list');
+    
+    if (mobileToggle && navList) {
+        mobileToggle.addEventListener('click', function() {
+            mobileToggle.classList.toggle('active');
+            navList.classList.toggle('active');
+        });
+        
+        // Закрытие меню при клике на ссылку
+        navList.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                mobileToggle.classList.remove('active');
+                navList.classList.remove('active');
+            }
+        });
+    }
+});
+</script>

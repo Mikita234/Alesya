@@ -1,0 +1,364 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "Оплата услуг психолога | Алеся Такун";
+const description = "Оплата услуг психолога Алеси Такун. Очный приём, онлайн-консультации, парная терапия. Банковские карты и перевод. Подтверждение в Telegram @alesiatakun";
+---
+
+<Layout title={title} description={description}>
+	<h1>Оплата услуг</h1>
+	<p>Выберите удобную для вас сумму и способ оплаты. После оплаты отправьте подтверждение в Telegram: <a href="https://t.me/alesiatakun" target="_blank">@alesiatakun</a></p>
+
+	<div class="payment-main">
+		<h2>Свободный платёж</h2>
+		<p>Введите любую сумму, которая вам подходит</p>
+		
+		<form class="free-payment" onsubmit="event.preventDefault()">
+			<div class="amount-input">
+				<label>Сумма (BYN)</label>
+				<input type="number" min="1" step="1" required placeholder="Введите сумму" />
+			</div>
+			<button class="btn btn-large" type="submit">Оплатить</button>
+		</form>
+		
+		<div class="quick-payments">
+			<h3>Быстрые суммы</h3>
+			<div class="quick-buttons">
+				<button class="btn-quick" data-amount="50">50 BYN</button>
+				<button class="btn-quick" data-amount="100">100 BYN</button>
+				<button class="btn-quick" data-amount="150">150 BYN</button>
+				<button class="btn-quick" data-amount="200">200 BYN</button>
+				<button class="btn-quick" data-amount="250">250 BYN</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="service-reference">
+		<h3>Справочно: стандартные тарифы</h3>
+		<ul class="service-list">
+			<li><strong>Очный приём</strong> — 150 BYN</li>
+			<li><strong>Онлайн-консультация</strong> — 150 BYN</li>
+			<li><strong>Парная терапия</strong> — 250 BYN</li>
+		</ul>
+	</div>
+
+	<p class="muted">После подключения провайдера, кнопки «Оплатить» будут вести на защищённую платёжную страницу провайдера с нужными параметрами и референсом заказа.</p>
+
+	<h2>Банковский перевод</h2>
+	<p>Получатель: ИП Такун Алеся Александровна</p>
+	<p>IBAN: <strong>BY80ALFA30132H53520010270000</strong></p>
+	<p class="muted">Провайдер: Альфа-Банк (Беларусь)</p>
+	
+	<div class="payment-notice">
+		<p><strong>Важно:</strong> После оплаты банковским переводом отправьте подтверждение в Telegram: <a href="https://t.me/alesiatakun" target="_blank">@alesiatakun</a></p>
+	</div>
+	
+	<p class="muted">Ознакомьтесь с <a href="/oferta">договором оферты</a> перед оплатой.</p>
+</Layout>
+
+<style>
+.payment-main {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    padding: 40px 32px;
+    border-radius: var(--radius);
+    text-align: center;
+    margin: 32px 0;
+    box-shadow: var(--shadow-lg);
+}
+
+.payment-main h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+}
+
+.payment-main p {
+    font-size: 1.1rem;
+    margin: 0 0 32px 0;
+    opacity: 0.9;
+}
+
+.free-payment {
+    max-width: 400px;
+    margin: 0 auto 32px auto;
+}
+
+.amount-input {
+    margin-bottom: 20px;
+}
+
+.amount-input label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.amount-input input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(10px);
+}
+
+.amount-input input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.amount-input input:focus {
+    outline: none;
+    border-color: white;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-large {
+    font-size: 1.2rem;
+    padding: 16px 32px;
+    background: white;
+    color: var(--accent);
+    font-weight: 700;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-large:hover {
+    background: var(--bg-alt);
+    transform: translateY(-2px);
+}
+
+.service-reference {
+    background: var(--bg-alt);
+    padding: 32px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin: 32px 0;
+}
+
+.service-reference h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 20px 0;
+    color: var(--text);
+    text-align: center;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.service-list li {
+    padding: 16px 20px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    font-size: 1.1rem;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.service-list li:hover {
+    border-color: var(--accent-light);
+    transform: translateY(-1px);
+}
+
+.service-list strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.btn { 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); 
+    color: #fff; 
+    text-decoration: none; 
+    padding: 14px 28px; 
+    border-radius: var(--radius); 
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover { 
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+}
+
+.free { 
+    display: flex; 
+    gap: 16px; 
+    align-items: flex-end; 
+    margin: 24px 0 32px; 
+    max-width: 500px;
+}
+
+.free input { 
+    padding: 14px 16px; 
+    border: 2px solid var(--border); 
+    border-radius: var(--radius); 
+    font-size: 1rem;
+    transition: var(--transition);
+    flex: 1;
+}
+
+.free input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.muted { 
+    color: var(--muted); 
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.quick-payments { 
+    margin: 32px 0; 
+    padding: 24px;
+    background: var(--bg-alt);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.quick-payments h3 {
+    margin: 0 0 16px 0;
+    color: var(--text);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.quick-buttons { 
+    display: flex; 
+    gap: 12px; 
+    flex-wrap: wrap; 
+    margin: 16px 0 0 0; 
+}
+
+.btn-quick { 
+    background: var(--bg); 
+    color: var(--text); 
+    border: 2px solid var(--border); 
+    padding: 10px 16px; 
+    border-radius: var(--radius-sm); 
+    cursor: pointer; 
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-quick:hover { 
+    background: var(--accent); 
+    color: #fff; 
+    border-color: var(--accent);
+    transform: translateY(-1px);
+}
+
+.payment-notice {
+    background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
+    border: 1px solid #0ea5e9;
+    border-radius: var(--radius);
+    padding: 20px;
+    margin: 24px 0;
+}
+
+.payment-notice p {
+    margin: 0;
+    color: #0c4a6e;
+    font-weight: 500;
+}
+
+.payment-notice a {
+    color: #0284c7;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.payment-notice a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .payment-main {
+        padding: 24px 20px;
+        margin: 24px 0;
+    }
+    
+    .payment-main h2 {
+        font-size: 2rem;
+    }
+    
+    .payment-main p {
+        font-size: 1rem;
+    }
+    
+    .free-payment {
+        margin-bottom: 24px;
+    }
+    
+    .amount-input input {
+        padding: 14px;
+        font-size: 1rem;
+    }
+    
+    .btn-large {
+        font-size: 1.1rem;
+        padding: 14px 24px;
+    }
+    
+    .quick-payments {
+        margin: 24px 0;
+        padding: 20px;
+    }
+    
+    .quick-buttons {
+        gap: 8px;
+    }
+    
+    .btn-quick {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .service-reference {
+        padding: 20px;
+        margin: 24px 0;
+    }
+    
+    .service-list li {
+        padding: 12px 16px;
+        font-size: 1rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const amountInput = document.querySelector('.amount-input input[type="number"]');
+	const quickButtons = document.querySelectorAll('.btn-quick');
+	
+	quickButtons.forEach(button => {
+		button.addEventListener('click', function() {
+			const amount = this.dataset.amount;
+			amountInput.value = amount;
+		});
+	});
+});
+</script>
+
