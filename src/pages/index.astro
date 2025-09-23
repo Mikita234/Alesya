@@ -16,9 +16,9 @@ const description = "Психолог в Минске. Очный приём и 
                 <a href={`${import.meta.env.BASE_URL}payments/`} class="btn">Записаться и оплатить</a>
 			</p>
 		</div>
-		<div class="hero-photo">
-            <img src={`${import.meta.env.BASE_URL}photo.jpg`} alt="Алеся Такун" width="300" height="400" loading="eager" />
-		</div>
+        <div class="hero-photo">
+            <img src={`${import.meta.env.BASE_URL}photo.jpg`} alt="Алеся Такун" width="300" height="400" loading="eager" decoding="async" fetchpriority="high" />
+        </div>
 	</div>
     <section id="about" class="section">
         <h2>Обо мне</h2>
@@ -600,6 +600,7 @@ const description = "Психолог в Минске. Очный приём и 
 document.addEventListener('DOMContentLoaded', function() {
     const quickButtons = document.querySelectorAll('.btn-quick');
     const amountInput = document.querySelector('.amount-input input');
+    const form = document.querySelector('.free-payment');
     
     if (quickButtons.length > 0 && amountInput) {
         quickButtons.forEach(button => {
@@ -611,6 +612,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 quickButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
             });
+        });
+    }
+
+    // Шаблон редиректа на hosted checkout Альфа-Банк (плейсхолдеры)
+    if (form && amountInput) {
+        form.addEventListener('submit', function() {
+            const amount = parseInt(amountInput.value, 10);
+            if (!amount || amount < 1) return;
+            // TODO: заменить URL и параметры на боевые после подключения мерчанта
+            const successUrl = `${location.origin}${import.meta.env.BASE_URL}?status=success`;
+            const cancelUrl = `${location.origin}${import.meta.env.BASE_URL}?status=cancel`;
+            const returnUrl = successUrl;
+            // Пример для hosted checkout: /pay?amount=... (здесь просто заглушка)
+            const providerUrl = `${import.meta.env.BASE_URL}payments/?amount=${amount}&success_url=${encodeURIComponent(successUrl)}&cancel_url=${encodeURIComponent(cancelUrl)}&return_url=${encodeURIComponent(returnUrl)}`;
+            window.location.href = providerUrl;
         });
     }
 });

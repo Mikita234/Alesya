@@ -9,6 +9,9 @@
         <meta name="description" content={Astro.props.description || "Алеся Такун — психолог в Минске, гештальт-консультант. Очный приём и онлайн-консультации. Помощь при КПТСР, эмоциональном выгорании, сложных отношениях, травме привязанности. Запись: +375 29 307 83 42"} />
         <meta name="keywords" content="психолог Минск, гештальт-терапевт, психолог онлайн, КПТСР, эмоциональное выгорание, травма привязанности, нарциссическая травма, парная терапия, психолог Беларусь" />
         <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={`https://mikita234.github.io${import.meta.env.BASE_URL}`} />
+        <link rel="alternate" hrefLang="ru" href={`https://mikita234.github.io${import.meta.env.BASE_URL}`} />
+        <link rel="alternate" hrefLang="ru-BY" href={`https://mikita234.github.io${import.meta.env.BASE_URL}`} />
         <meta name="author" content="Алеся Такун" />
         <meta name="geo.region" content="BY" />
         <meta name="geo.placename" content="Минск" />
@@ -19,8 +22,8 @@
         <meta property="og:title" content="Алеся Такун — психолог в Минске | Гештальт-консультант" />
         <meta property="og:description" content="Психолог в Минске. Очный приём и онлайн-консультации. Помощь при КПТСР, выгорании, сложных отношениях, травме привязанности. Запись: +375 29 307 83 42" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://mikita234.github.io/Alesya" />
-        <meta property="og:image" content="https://mikita234.github.io/Alesya/Photo/photo.jpg" />
+        <meta property="og:url" content={`https://mikita234.github.io${import.meta.env.BASE_URL}`} />
+        <meta property="og:image" content={`https://mikita234.github.io${import.meta.env.BASE_URL}photo.jpg`} />
         <meta property="og:locale" content="ru_BY" />
         <meta property="og:site_name" content="Алеся Такун — психолог" />
         
@@ -28,7 +31,7 @@
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Алеся Такун — психолог в Минске" />
         <meta name="twitter:description" content="Гештальт-консультант. Очный приём и онлайн. Помощь при КПТСР, выгорании, сложных отношениях." />
-        <meta name="twitter:image" content="https://mikita234.github.io/Alesya/Photo/photo.jpg" />
+        <meta name="twitter:image" content={`https://mikita234.github.io${import.meta.env.BASE_URL}photo.jpg`} />
         
         <!-- Structured Data -->
         <script type="application/ld+json">
@@ -38,8 +41,8 @@
           "name": "Алеся Такун",
           "jobTitle": "Психолог, гештальт-консультант",
           "description": "Психолог в Минске, специалист по травме привязанности и нарциссической травме",
-            "url": "https://mikita234.github.io/Alesya",
-            "image": "https://mikita234.github.io/Alesya/Photo/photo.jpg",
+            "url": `https://mikita234.github.io${import.meta.env.BASE_URL}`,
+            "image": `https://mikita234.github.io${import.meta.env.BASE_URL}photo.jpg`,
           "telephone": "+375293078342",
           "email": "alessia-sia@mail.ru",
           "address": {
@@ -78,6 +81,8 @@
           ]
         }
         </script>
+        <!-- Preload main hero image -->
+        <link rel="preload" as="image" href={`${import.meta.env.BASE_URL}photo.jpg`} imagesrcset={`${import.meta.env.BASE_URL}photo.jpg 1x`} />
         
         <!-- Яндекс.Метрика -->
         <script type="text/javascript">
@@ -113,11 +118,11 @@
                     <span></span>
                 </button>
                     <ul class="nav-list">
-                        <li><a href={`${import.meta.env.BASE_URL}`}>Главная</a></li>
-                        <li><a href={`${import.meta.env.BASE_URL}#about`}>Обо мне</a></li>
-                        <li><a href={`${import.meta.env.BASE_URL}#services`}>Услуги</a></li>
-                        <li><a href={`${import.meta.env.BASE_URL}#payments`}>Оплата</a></li>
-                        <li><a href={`${import.meta.env.BASE_URL}oferta/`}>Договор</a></li>
+                        <li><a class="nav-link" data-target="" href={`${import.meta.env.BASE_URL}`}>Главная</a></li>
+                        <li><a class="nav-link" data-target="#about" href={`${import.meta.env.BASE_URL}#about`}>Обо мне</a></li>
+                        <li><a class="nav-link" data-target="#services" href={`${import.meta.env.BASE_URL}#services`}>Услуги</a></li>
+                        <li><a class="nav-link" data-target="#payments" href={`${import.meta.env.BASE_URL}#payments`}>Оплата</a></li>
+                        <li><a class="nav-link" href={`${import.meta.env.BASE_URL}oferta/`}>Договор</a></li>
                     </ul>
             </nav>
         </header>
@@ -470,6 +475,8 @@ body {
 document.addEventListener('DOMContentLoaded', function() {
     const mobileToggle = document.querySelector('.mobile-menu-toggle');
     const navList = document.querySelector('.nav-list');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const header = document.querySelector('.site-header');
     
     if (mobileToggle && navList) {
         mobileToggle.addEventListener('click', function() {
@@ -485,5 +492,44 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Плавный скролл и подсветка активного пункта
+    function setActiveLink(hash) {
+        navLinks.forEach((l) => l.classList.remove('active'));
+        const active = Array.from(navLinks).find((l) => l.getAttribute('data-target') === hash);
+        if (active) active.classList.add('active');
+    }
+
+    navLinks.forEach((link) => {
+        const hash = link.getAttribute('data-target');
+        if (!hash) return;
+        link.addEventListener('click', function(e) {
+            // внутри одной страницы — скроллим плавно
+            const target = document.querySelector(hash);
+            if (target) {
+                e.preventDefault();
+                const headerOffset = header ? header.offsetHeight + 8 : 0;
+                const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - headerOffset;
+                window.history.replaceState(null, '', `${import.meta.env.BASE_URL}${hash}`);
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                setActiveLink(hash);
+            }
+        });
+    });
+
+    // Подсветка по скроллу
+    const sections = ['#about', '#services', '#payments'].map((s) => document.querySelector(s)).filter(Boolean);
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY + (header ? header.offsetHeight + 16 : 0);
+        for (const sec of sections) {
+            const top = sec.offsetTop;
+            const bottom = top + sec.offsetHeight;
+            if (scrollPos >= top && scrollPos < bottom) {
+                setActiveLink(`#${sec.id}`);
+                break;
+            }
+        }
+    });
 });
 </script>
