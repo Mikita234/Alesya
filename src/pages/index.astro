@@ -32,7 +32,9 @@ const description = "Психолог в Минске. Очный приём и 
             <li>запутанные семейные сценарии и непрожитые эмоции</li>
             <li>жизненные кризисы и утраты</li>
         </ul>
-        <p class="services-note">Если вашего запроса нет в списке — свяжитесь со мной, и мы обсудим, смогу ли я быть вам полезна.</p>
+        <div class="services-note-container">
+            <p class="services-note">Если вашего запроса нет в списке — свяжитесь со мной, и мы обсудим, смогу ли я быть вам полезна.</p>
+        </div>
     </section>
 
 
@@ -235,15 +237,19 @@ const description = "Психолог в Минске. Очный приём и 
     border-color: var(--accent-light);
 }
 
+.services-note-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
 .services-note {
     font-size: 1rem;
     color: var(--text-light);
     text-align: center;
-    margin-top: 32px;
     font-style: italic;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0;
 }
 
 /* Payment Section */
