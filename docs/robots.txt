@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://mikita234.github.io/Alesya/sitemap.xml
-Sitemap: https://mikita234.github.io/Alesya/sitemap-index.xml
-
