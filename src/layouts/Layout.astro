@@ -76,6 +76,29 @@
           ]
         }
         </script>
+        
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "legalName": "ИП Такун Алеся Александровна",
+          "taxID": "491661318",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ул. Энгельса, д. 12, кв. 15",
+            "addressLocality": "р.п. Сосновый Бор",
+            "addressRegion": "Светлогорский р-н, Гомельская обл.",
+            "addressCountry": "BY"
+          },
+          "bankAccount": {
+            "@type": "BankAccount",
+            "accountNumber": "BY80ALFA30132H53520010270000",
+            "bankName": "ЗАО «Альфа-Банк»"
+          },
+          "email": "alessia-sia@mail.ru",
+          "telephone": "+375293078342"
+        }
+        </script>
         <!-- Preload main hero image -->
         <link rel="preload" as="image" href={`${import.meta.env.BASE_URL}hero.jpg?v=3`} imagesrcset={`${import.meta.env.BASE_URL}hero.jpg?v=3 1x`} />
         
@@ -171,18 +194,37 @@
                 <ul class="footer-links">
                     <li>Индивидуальная консультация</li>
                     <li>Онлайн-сессии</li>
-                    <li>Групповая психотерапия</li>
+                    <li>Групповые психологические встречи</li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h4>Реквизиты</h4>
-                <p class="footer-text">
-                    ИП Такун Алеся Александровна<br/>
-                    УНП: 491661318<br/>
-                    IBAN: BY80ALFA30132H53520010270000<br/>
-                    Альфа-Банк (Беларусь)
-                </p>
+                <div class="requisites">
+                    <p><strong>ИП Такун Алеся Александровна</strong></p>
+                    <p>УНП: 491661318</p>
+                    <p>Юридический и почтовый адрес: РБ, Гомельская обл., Светлогорский р-н, р.п. Сосновый Бор, ул. Энгельса, д. 12, кв. 15</p>
+                    <p>IBAN: BY80ALFA30132H53520010270000</p>
+                    <p>ЗАО «Альфа-Банк», 220013, г. Минск, ул. Сурганова, 43-47</p>
+                    <p>SWIFT/BIC: ALFABY2X</p>
+                    <p>Тел.: +375 29 307-83-42</p>
+                    <p>E-mail: alessia-sia@mail.ru</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="payment-methods">
+            <h4>Мы принимаем к оплате:</h4>
+            <div class="payment-icons">
+                <img src="/visa.svg" alt="Visa" height="24" />
+                <img src="/visa-secure.svg" alt="Visa Secure" height="24" />
+                <img src="/mastercard.svg" alt="Mastercard" height="24" />
+                <img src="/mc-id-check.svg" alt="Mastercard ID Check" height="24" />
+                <img src="/belkart.svg" alt="Белкарт" height="24" />
+                <img src="/belkart-internet-parol.svg" alt="Белкарт Интернет-Пароль" height="24" />
+                <img src="/alfabank.svg" alt="Альфа-Банк" height="24" />
+                <img src="/applepay.svg" alt="Apple Pay" height="24" />
+                <img src="/samsungpay.svg" alt="Samsung Pay" height="24" />
             </div>
         </div>
         
@@ -322,6 +364,45 @@ body {
     color: #b0b0b0;
     line-height: 1.6;
     margin: 0;
+}
+
+.requisites p {
+    color: #b0b0b0;
+    line-height: 1.5;
+    margin: 0 0 8px 0;
+    font-size: 14px;
+}
+
+.payment-methods {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+.payment-methods h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+}
+
+.payment-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.payment-icons img {
+    filter: grayscale(0);
+    transition: filter 0.3s ease;
+}
+
+.payment-icons img:hover {
+    filter: grayscale(0);
 }
 
 .contact-links {
