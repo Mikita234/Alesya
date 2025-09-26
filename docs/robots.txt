@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://alesyatakun.by/sitemap.xml
+Sitemap: https://alesyatakun.by/sitemap-index.xml
+

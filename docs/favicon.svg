@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Контур сердца -->
+  <path d="M50 90
+           L20 55
+           A20 20 0 0 1 50 25
+           A20 20 0 0 1 80 55
+           Z"
+        fill="none" stroke="black" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Символ Ψ -->
+  <text x="50" y="58"
+        font-family="Arial, sans-serif"
+        font-size="32"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-weight="bold">Ψ</text>
+</svg>
