@@ -882,7 +882,7 @@ function handlePaymentSubmit(event) {
     
     // Переходим на страницу оплаты с параметрами для Альфа-Банк
     const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
-    const paymentsUrl = `${baseUrl}payments/?amount=${amount}&success_url=${encodeURIComponent(baseUrl + '?status=success')}&cancel_url=${encodeURIComponent(baseUrl + '?status=cancel')}&return_url=${encodeURIComponent(baseUrl + '?status=success')}`;
+    const paymentsUrl = `${baseUrl}payments/?amount=${amount}&success_url=${encodeURIComponent(baseUrl + 'thanks/')}&cancel_url=${encodeURIComponent(baseUrl + '?status=cancel')}&return_url=${encodeURIComponent(baseUrl + 'thanks/')}`;
     
     window.location.href = paymentsUrl;
 }

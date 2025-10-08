@@ -3,6 +3,7 @@ export const GET = ({ site }) => {
     const urls = [
         { url: '/', priority: '1.0', changefreq: 'weekly' },
         { url: '/payments', priority: '0.8', changefreq: 'monthly' },
+        { url: '/thanks', priority: '0.5', changefreq: 'yearly' },
         { url: '/oferta', priority: '0.6', changefreq: 'monthly' },
         { url: '/privacy', priority: '0.5', changefreq: 'yearly' },
         { url: '/contacts', priority: '0.7', changefreq: 'monthly' },
