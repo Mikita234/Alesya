@@ -25,3 +25,6 @@ pnpm-debug.log*
 node_modules/
 Photo/
 logo/
+
+# Local Netlify folder
+.netlify
