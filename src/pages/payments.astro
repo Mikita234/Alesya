@@ -38,10 +38,10 @@ const description = "Оплата услуг психолога Алеси Та�
 		<h2>Свободный платёж</h2>
 		<p>Введите любую сумму, которая вам подходит</p>
 		
-		<form class="free-payment" onsubmit="event.preventDefault()">
+		<form class="free-payment" onsubmit="handlePaymentSubmit(event)">
 			<div class="amount-input">
 				<label>Сумма (BYN)</label>
-				<input type="number" min="1" step="1" required placeholder="Введите сумму" />
+				<input type="number" min="1" step="1" required placeholder="Введите сумму" id="amount-input" />
 			</div>
 			<button class="btn btn-large" type="submit">Оплатить</button>
 		</form>
@@ -342,6 +342,13 @@ const description = "Оплата услуг психолога Алеси Та�
     transform: translateY(-1px);
 }
 
+.btn-quick.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    font-weight: 600;
+}
+
 .payment-notice {
     background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
     border: 1px solid #0ea5e9;
@@ -428,16 +435,43 @@ const description = "Оплата услуг психолога Алеси Та�
 </style>
 
 <script>
+function handlePaymentSubmit(event) {
+    event.preventDefault();
+    const amountInput = document.getElementById('amount-input');
+    const amount = amountInput.value;
+    
+    if (!amount || amount < 1) {
+        alert('Пожалуйста, введите корректную сумму');
+        return;
+    }
+    
+    // Здесь будет интеграция с платежным провайдером
+    // Пока что просто показываем сообщение
+    alert(`Оплата на сумму ${amount} BYN будет обработана после подключения платежного провайдера. Свяжитесь с @alesiatakun в Telegram для уточнения деталей.`);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-	const amountInput = document.querySelector('.amount-input input[type="number"]');
-	const quickButtons = document.querySelectorAll('.btn-quick');
-	
-	quickButtons.forEach(button => {
-		button.addEventListener('click', function() {
-			const amount = this.dataset.amount;
-			amountInput.value = amount;
-		});
-	});
+    const amountInput = document.getElementById('amount-input');
+    const quickButtons = document.querySelectorAll('.btn-quick');
+    
+    // Получаем сумму из URL параметров
+    const urlParams = new URLSearchParams(window.location.search);
+    const amountFromUrl = urlParams.get('amount');
+    
+    if (amountFromUrl && amountInput) {
+        amountInput.value = amountFromUrl;
+    }
+    
+    quickButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const amount = this.dataset.amount;
+            amountInput.value = amount;
+            
+            // Подсветка активной кнопки
+            quickButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
 });
 </script>
 
