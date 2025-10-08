@@ -406,28 +406,19 @@ const description = "Психолог в Минске. Очный приём и 
 }
 
 /* Payment Section */
+/* Серенити-редакционный стиль */
 .payment-main {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    color: white;
-    padding: 40px 32px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 32px 24px;
     border-radius: var(--radius);
-    text-align: center;
-    margin: 32px 0;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
+    text-align: left;
+    margin: 24px 0;
+    box-shadow: none;
+    border: 1px solid var(--border);
 }
 
-.payment-main::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 1;
-}
+/* убираем декоративный оверлей */
 
 .payment-main > * {
     position: relative;
@@ -435,23 +426,18 @@ const description = "Психолог в Минске. Очный приём и 
 }
 
 .payment-main h3 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
     font-weight: 700;
-    margin: 0 0 16px 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0 0 12px 0;
 }
 
 .payment-main p {
-    font-size: 1.1rem;
-    margin: 0 0 24px 0;
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 1.05rem;
+    margin: 0 0 20px 0;
+    color: var(--text-light);
     font-weight: 500;
-    text-align: center;
-    line-height: 1.4;
-    max-width: 100%;
-    word-wrap: break-word;
-    hyphens: auto;
+    text-align: left;
+    line-height: 1.6;
 }
 
 .btn-large {
@@ -477,59 +463,53 @@ const description = "Психолог в Минске. Очный приём и 
 
 .amount-input label {
     display: block;
-    color: white;
+    color: var(--text);
     font-weight: 600;
     margin-bottom: 8px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .amount-input input {
-    width: 200px;
-    padding: 12px 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    max-width: 320px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 1.1rem;
-    text-align: center;
-    backdrop-filter: blur(10px);
+    background: #fff;
+    color: var(--text);
+    font-size: 1rem;
+    text-align: left;
     transition: var(--transition);
-    margin: 0 auto;
-    display: block;
 }
 
 .amount-input input:focus {
     outline: none;
-    border-color: white;
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-light);
+    box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.25);
 }
 
 .input-help {
     display: block;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.8rem;
-    margin-top: 4px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 6px;
 }
 
 .consent { 
     margin: 12px 0 16px; 
-    text-align: center; 
+    text-align: left; 
 }
 
 .consent-label { 
     display: inline-flex; 
     align-items: center; 
     gap: 8px; 
-    color: rgba(255,255,255,0.95);
+    color: var(--text-light);
 }
 
 .consent-label a { 
-    color: #fff; 
+    color: var(--accent); 
     text-decoration: underline; 
     font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .consent-label a:hover { 
@@ -542,25 +522,23 @@ const description = "Психолог в Минске. Очный приём и 
 }
 
 .quick-payments {
-    margin-top: 32px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
 }
 
 .quick-payments h4 {
-    color: white;
+    color: var(--text);
     font-size: 1.1rem;
     font-weight: 600;
     margin: 0 0 8px 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .quick-payments-hint {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--muted);
     font-size: 0.9rem;
     font-style: italic;
-    margin: 0 0 16px 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    margin: 0 0 12px 0;
 }
 
 .quick-buttons {
@@ -571,21 +549,20 @@ const description = "Психолог в Минске. Очный приём и 
 }
 
 .btn-quick {
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: var(--radius);
+    padding: 10px 14px;
+    background: #F3F2EF;
+    color: var(--text);
+    border: 1px solid #E7E4DE;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
     transition: var(--transition);
-    backdrop-filter: blur(10px);
 }
 
 .btn-quick:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: #ECEAE6;
+    border-color: #DEDACE;
     transform: translateY(-1px);
 }
 

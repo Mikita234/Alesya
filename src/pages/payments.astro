@@ -158,13 +158,14 @@ const description = "Оплата услуг психолога Алеси Та�
 }
 
 .payment-main {
-    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-    color: white;
-    padding: 40px 32px;
+    background: var(--surface);
+    color: var(--text);
+    padding: 32px 24px;
     border-radius: var(--radius);
-    text-align: center;
-    margin: 32px 0;
-    box-shadow: var(--shadow-lg);
+    text-align: left;
+    margin: 24px 0;
+    box-shadow: none;
+    border: 1px solid var(--border);
 }
 
 .payment-main h2 {
@@ -192,18 +193,17 @@ const description = "Оплата услуг психолога Алеси Та�
     display: block;
     font-weight: 600;
     margin-bottom: 8px;
-    color: white;
+    color: var(--text);
 }
 
 .amount-input input {
     width: 100%;
-    padding: 16px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 14px;
+    border: 1px solid var(--border);
     border-radius: var(--radius);
-    font-size: 1.1rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    backdrop-filter: blur(10px);
+    font-size: 1rem;
+    background: #fff;
+    color: var(--text);
 }
 
 .amount-input input::placeholder {
@@ -212,23 +212,22 @@ const description = "Оплата услуг психолога Алеси Та�
 
 .amount-input input:focus {
     outline: none;
-    border-color: white;
-    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--accent-light);
+    box-shadow: 0 0 0 3px rgba(165, 180, 252, 0.25);
 }
 
 .input-help {
     display: block;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.8rem;
-    margin-top: 4px;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 6px;
 }
 
 .btn-large {
-    font-size: 1.2rem;
-    padding: 16px 32px;
-    background: white;
-    color: var(--accent);
+    font-size: 1.05rem;
+    padding: 14px 20px;
+    background: var(--accent);
+    color: #fff;
     font-weight: 700;
     border: none;
     border-radius: var(--radius);
@@ -237,7 +236,7 @@ const description = "Оплата услуг психолога Алеси Та�
 }
 
 .btn-large:hover {
-    background: var(--bg-alt);
+    background: var(--accent-dark);
     transform: translateY(-2px);
 }
 
@@ -339,11 +338,11 @@ const description = "Оплата услуг психолога Алеси Та�
 }
 
 .quick-payments { 
-    margin: 32px 0; 
-    padding: 24px;
-    background: var(--bg-alt);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
+    margin: 24px 0 0; 
+    padding: 16px 0 0;
+    background: transparent;
+    border-radius: 0;
+    border-top: 1px solid var(--border);
 }
 
 .quick-payments h3 {
@@ -368,10 +367,10 @@ const description = "Оплата услуг психолога Алеси Та�
 }
 
 .btn-quick { 
-    background: var(--bg); 
+    background: #F3F2EF; 
     color: var(--text); 
-    border: 2px solid var(--border); 
-    padding: 10px 16px; 
+    border: 1px solid #E7E4DE; 
+    padding: 10px 14px; 
     border-radius: var(--radius-sm); 
     cursor: pointer; 
     font-weight: 500;

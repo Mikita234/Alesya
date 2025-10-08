@@ -260,7 +260,7 @@
           gtag('config', 'GA_MEASUREMENT_ID');
         </script>
     </head>
-    <body>
+    <body class="theme-serene">
         <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
         <header class="site-header">
             <nav class="nav">
@@ -375,6 +375,25 @@
 		width: 100%;
 		height: 100%;
 	}
+/* Серенити-тема (ветка дизайна) */
+.theme-serene {
+    --text: #1B1D1F;
+    --text-light: #5B616E;
+    --muted: #6B7280;
+    --bg: #FCFAF7;
+    --bg-alt: #FFFFFF;
+    --surface: #FFFFFF;
+    --border: #EAE7E2;
+    --accent: #6366F1;
+    --accent-light: #A5B4FC;
+    --accent-dark: #4F46E5;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.08);
+    --radius: 12px;
+    --radius-sm: 9999px;
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 :root {
     --text: #1a1a1a;
     --text-light: #4a4a4a;
