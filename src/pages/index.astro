@@ -829,7 +829,7 @@ function handlePaymentSubmit(event) {
         return;
     }
     
-    // Переходим на страницу оплаты с параметрами
+    // Переходим на страницу оплаты с параметрами для Альфа-Банк
     const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
     const paymentsUrl = `${baseUrl}payments/?amount=${amount}&success_url=${encodeURIComponent(baseUrl + '?status=success')}&cancel_url=${encodeURIComponent(baseUrl + '?status=cancel')}&return_url=${encodeURIComponent(baseUrl + '?status=success')}`;
     
@@ -839,6 +839,22 @@ function handlePaymentSubmit(event) {
 document.addEventListener('DOMContentLoaded', function() {
     const quickButtons = document.querySelectorAll('.btn-quick');
     const amountInput = document.getElementById('amount-input');
+    
+    // Обработка статусов оплаты
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+    
+    if (status === 'success') {
+        // Показываем сообщение об успешной оплате
+        setTimeout(() => {
+            alert('✅ Оплата прошла успешно!\n\nСвяжитесь с @alesiatakun в Telegram для выбора времени консультации.');
+        }, 500);
+    } else if (status === 'cancel') {
+        // Показываем сообщение об отмене
+        setTimeout(() => {
+            alert('❌ Оплата была отменена.\n\nЕсли у вас возникли вопросы, свяжитесь с @alesiatakun в Telegram.');
+        }, 500);
+    }
     
     if (quickButtons.length > 0 && amountInput) {
         quickButtons.forEach(button => {
