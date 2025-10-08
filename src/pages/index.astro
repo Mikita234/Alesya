@@ -74,8 +74,15 @@ const description = "Психолог в Минске. Очный приём и 
                     <input type="number" min="1" step="1" required placeholder="Введите сумму" id="amount-input" aria-describedby="amount-help" />
                     <small id="amount-help" class="input-help">Минимальная сумма: 1 BYN</small>
                 </div>
+                <div class="consent">
+                    <label class="consent-label">
+                        <input type="checkbox" id="consent-checkbox" required />
+                        <span>Я соглашаюсь с <a href="/oferta/" target="_blank">договором оферты</a> и <a href="/privacy/" target="_blank">политикой конфиденциальности</a></span>
+                    </label>
+                </div>
                 <button class="btn btn-large" type="submit">Оплатить</button>
             </form>
+            <p class="muted">Свободный платёж нужен для постоянных клиентов: некоторые платят 90–140 BYN. Новым клиентам — стандартная стоимость 150 BYN.</p>
             
             <div class="quick-payments">
                 <h4>Быстрые суммы</h4>

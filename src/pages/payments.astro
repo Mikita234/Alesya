@@ -44,6 +44,12 @@ const description = "Оплата услуг психолога Алеси Та�
 				<input type="number" min="1" step="1" required placeholder="Введите сумму" id="amount-input" aria-describedby="amount-help" />
 				<small id="amount-help" class="input-help">Минимальная сумма: 1 BYN</small>
 			</div>
+			<div class="consent">
+				<label class="consent-label">
+					<input type="checkbox" id="consent-checkbox" required />
+					<span>Я соглашаюсь с <a href="/oferta/" target="_blank">договором оферты</a> и <a href="/privacy/" target="_blank">политикой конфиденциальности</a></span>
+				</label>
+			</div>
 			<button class="btn btn-large" type="submit">Оплатить</button>
 		</form>
 		
@@ -436,6 +442,18 @@ const description = "Оплата услуг психолога Алеси Та�
     font-size: 0.9rem;
     color: #0c4a6e;
 }
+
+.consent {
+    margin: 12px 0 16px;
+    text-align: center;
+}
+.consent-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.95);
+}
+.consent-label a { color: #fff; text-decoration: underline; }
 
 /* Mobile Styles */
 @media (max-width: 768px) {
