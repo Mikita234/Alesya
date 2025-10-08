@@ -539,6 +539,15 @@ const description = "Психолог в Минске. Очный приём и 
         top: 16px;
     }
     
+    .services-note {
+        font-size: 0.9rem;
+        text-align: left;
+        line-height: 1.4;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
     .payment-main {
         padding: 24px 20px;
         margin: 24px 0;
@@ -591,14 +600,18 @@ const description = "Психолог в Минске. Очный приём и 
     }
     
     .btn-quick {
-        padding: 6px 12px;
-        font-size: 0.85rem;
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        min-height: 44px;
+        touch-action: manipulation;
     }
     
     .amount-input input {
         width: 150px;
-        padding: 10px 12px;
+        padding: 14px 16px;
         font-size: 1rem;
+        min-height: 48px;
+        touch-action: manipulation;
     }
 }
 
@@ -612,8 +625,10 @@ const description = "Психолог в Минске. Очный приём и 
     }
     
     .btn { 
-        padding: 12px 24px; 
-        font-size: 0.95rem;
+        padding: 16px 28px; 
+        font-size: 1rem;
+        min-height: 48px;
+        touch-action: manipulation;
     }
     
     .payment-main p {

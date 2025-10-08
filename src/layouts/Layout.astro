@@ -419,11 +419,13 @@ body {
     opacity: 0;
 }
 
-.payment-logo-container:hover .payment-logo-black {
+.payment-logo-container:hover .payment-logo-black,
+.payment-logo-container:active .payment-logo-black {
     opacity: 0;
 }
 
-.payment-logo-container:hover .payment-logo-white {
+.payment-logo-container:hover .payment-logo-white,
+.payment-logo-container:active .payment-logo-white {
     opacity: 1;
 }
 
@@ -516,8 +518,10 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 12px;
     gap: 4px;
+    min-height: 48px;
+    touch-action: manipulation;
 }
 
 .mobile-menu-toggle span {
@@ -580,6 +584,13 @@ body {
     
     .nav-list li {
         margin: 8px 0;
+    }
+    
+    .nav-link {
+        display: block;
+        padding: 16px 20px;
+        min-height: 48px;
+        touch-action: manipulation;
     }
     
     .nav-list a {
