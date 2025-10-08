@@ -15,4 +15,19 @@
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://alesyatakun.by//privacy</loc>
+    <priority>0.5</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://alesyatakun.by//contacts</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://alesyatakun.by//pricing</loc>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>

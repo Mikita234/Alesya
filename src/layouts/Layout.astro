@@ -2,7 +2,7 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
         <meta name="generator" content={Astro.generator} />
         <title>{Astro.props.title || "Алеся Такун — психолог, гештальт-консультант"}</title>
@@ -17,6 +17,11 @@
         <meta name="geo.placename" content="Минск" />
         <meta name="geo.position" content="53.9006;27.5590" />
         <meta name="ICBM" content="53.9006, 27.5590" />
+        
+        <!-- Security Headers -->
+        <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+        <meta http-equiv="X-Frame-Options" content="DENY" />
+        <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
         
         <!-- Open Graph -->
         <meta property="og:title" content="Алеся Такун — психолог в Минске | Гештальт-консультант" />
@@ -127,6 +132,7 @@
         </script>
     </head>
     <body>
+        <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
         <header class="site-header">
             <nav class="nav">
                 <a class="logo" href={`${import.meta.env.BASE_URL}`}>Алеся Такун</a>
@@ -143,7 +149,7 @@
                     </ul>
             </nav>
         </header>
-        <main class="container">
+        <main class="container" role="main" id="main-content">
             <slot />
         </main>
     <footer class="site-footer">
@@ -267,6 +273,24 @@ body {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Skip Link for Accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: var(--accent);
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 6px;
 }
 
 .site-header { 
