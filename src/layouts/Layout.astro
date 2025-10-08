@@ -218,7 +218,10 @@
         <div class="payment-methods">
             <h4>Мы принимаем к оплате:</h4>
             <div class="payment-icons">
-                <img src="/payment-logos.png" alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт Интернет-Пароль, Альфа-Банк, Apple Pay, Samsung Pay" height="80" />
+                <div class="payment-logo-container">
+                    <img src="/payment-logos.png" alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт Интернет-Пароль, Альфа-Банк, Apple Pay, Samsung Pay" height="80" class="payment-logo-black" />
+                    <img src="/payment-logos-white.png" alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт Интернет-Пароль, Альфа-Банк, Apple Pay, Samsung Pay" height="80" class="payment-logo-white" />
+                </div>
             </div>
         </div>
         
@@ -391,16 +394,37 @@ body {
     margin-top: 16px;
 }
 
-.payment-icons img {
+.payment-logo-container {
+    position: relative;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.payment-logo-container:hover {
+    transform: scale(1.05);
+}
+
+.payment-logo-black,
+.payment-logo-white {
     height: 80px;
     opacity: 0.9;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     border-radius: 4px;
 }
 
-.payment-icons img:hover {
+.payment-logo-white {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.payment-logo-container:hover .payment-logo-black {
+    opacity: 0;
+}
+
+.payment-logo-container:hover .payment-logo-white {
     opacity: 1;
-    transform: scale(1.02);
 }
 
 .contact-links {
