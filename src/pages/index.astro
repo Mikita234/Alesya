@@ -701,14 +701,14 @@ const description = "Психолог в Минске. Очный приём и 
     
     .hero-content h1 { 
         font-size: 2.2rem; 
-        text-align: center;
+        text-align: left;
         line-height: 1.2;
     }
     
     .hero-photo { 
-        order: -1; 
+        order: 0; 
         max-width: 240px;
-        margin: 0 auto;
+        margin: 0;
     }
     
     .section { 
@@ -772,6 +772,7 @@ const description = "Психолог в Минске. Очный приём и 
     .payment-main {
         padding: 24px 20px;
         margin: 24px 0;
+        text-align: left;
     }
     
     .payment-main h3 {
@@ -782,6 +783,7 @@ const description = "Психолог в Минске. Очный приём и 
         font-size: 1rem;
         line-height: 1.3;
         padding: 0 10px;
+        text-align: left;
     }
     
     .btn-large {
@@ -837,11 +839,12 @@ const description = "Психолог в Минске. Очный приём и 
     }
     
     .amount-input input {
-        width: 150px;
+        width: 100%;
         padding: 14px 16px;
         font-size: 1rem;
         min-height: 48px;
         touch-action: manipulation;
+        margin: 0;
     }
 }
 
@@ -852,6 +855,8 @@ const description = "Психолог в Минске. Очный приём и 
     
     .subtitle { 
         font-size: 1.1rem; 
+        text-align: left;
+        margin-bottom: 12px;
     }
     
     .btn { 
@@ -859,6 +864,8 @@ const description = "Психолог в Минске. Очный приём и 
         font-size: 1rem;
         min-height: 48px;
         touch-action: manipulation;
+        width: 100%;
+        max-width: 320px;
     }
     
     .payment-main p {
@@ -942,13 +949,13 @@ document.addEventListener('DOMContentLoaded', function() {
 	margin-bottom: 40px;
 }
 
-.instagram-posts {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	gap: 24px;
-	max-width: 1200px;
-	margin: 0 auto;
-}
+    .instagram-posts {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
 .instagram-post {
 	display: flex;
@@ -1009,19 +1016,25 @@ document.addEventListener('DOMContentLoaded', function() {
 	box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
 }
 
-@media (max-width: 768px) {
-	.instagram-posts {
-		grid-template-columns: 1fr;
-		gap: 20px;
-	}
-	
-	.instagram-post.center {
-		order: 0;
-	}
-	
-	.instagram-placeholder {
-		min-height: 300px;
-		padding: 30px 15px;
-	}
-}
+    @media (max-width: 768px) {
+    	.instagram-posts {
+    		grid-template-columns: 1fr;
+    		gap: 16px;
+    	}
+    
+    	.instagram-post iframe {
+    		width: 100%;
+    		height: 420px;
+    		max-width: none;
+    	}
+    
+    	.instagram-post.center {
+    		order: 0;
+    	}
+    
+    	.instagram-placeholder {
+    		min-height: 280px;
+    		padding: 24px 12px;
+    	}
+    }
 </style>
