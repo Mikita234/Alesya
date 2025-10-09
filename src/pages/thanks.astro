@@ -3,6 +3,12 @@ import Layout from '../layouts/Layout.astro';
 
 const title = "Спасибо за оплату | Алеся Такун — психолог";
 const description = "Оплата прошла успешно. Свяжитесь с Алесей Такун в Telegram для выбора времени консультации.";
+
+// Получаем параметры из URL для отображения статуса платежа
+const url = Astro.url;
+const orderId = url.searchParams.get('orderId');
+const status = url.searchParams.get('status');
+const amount = url.searchParams.get('amount');
 ---
 
 <Layout title={title} description={description}>
@@ -17,6 +23,30 @@ const description = "Оплата прошла успешно. Свяжитес�
             
             <h1>Спасибо за оплату!</h1>
             <p class="thanks-message">Ваш платеж успешно обработан. Мы получили подтверждение и свяжемся с вами в ближайшее время.</p>
+            
+            {orderId && (
+                <div class="payment-info">
+                    <h3>Детали платежа:</h3>
+                    <div class="payment-details">
+                        <div class="detail-item">
+                            <span class="label">Номер заказа:</span>
+                            <span class="value">{orderId}</span>
+                        </div>
+                        {amount && (
+                            <div class="detail-item">
+                                <span class="label">Сумма:</span>
+                                <span class="value">{amount} BYN</span>
+                            </div>
+                        )}
+                        {status && (
+                            <div class="detail-item">
+                                <span class="label">Статус:</span>
+                                <span class="value status-{status}">{status === 'success' ? 'Успешно' : status}</span>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
             
             <div class="next-steps">
                 <h2>Что дальше?</h2>
@@ -96,6 +126,58 @@ const description = "Оплата прошла успешно. Свяжитес�
     color: var(--text-light);
     margin-bottom: 32px;
     line-height: 1.6;
+}
+
+.payment-info {
+    background: var(--bg);
+    padding: 24px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    margin: 24px 0;
+    text-align: left;
+}
+
+.payment-info h3 {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+.payment-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-item .label {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.detail-item .value {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.detail-item .value.status-success {
+    color: #10B981;
+}
+
+.detail-item .value.status-fail {
+    color: #EF4444;
 }
 
 .next-steps {

@@ -48,8 +48,8 @@ export async function POST({ request }: APIContext) {
       orderNumber,
       amount: String(amountMinor),
       currency: '933',                  // BYN
-      returnUrl: returnUrl || 'https://alesyatakun.by/thanks/',
-      failUrl: failUrl || 'https://alesyatakun.by/?status=fail',
+      returnUrl: returnUrl || `${request.headers.get('origin') || 'http://localhost:4321'}/thanks/`,
+      failUrl: failUrl || `${request.headers.get('origin') || 'http://localhost:4321'}/?status=fail`,
       description: `Order ${orderNumber}`
     });
 
