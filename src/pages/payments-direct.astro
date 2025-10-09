@@ -179,51 +179,57 @@ const description = "Оплатите консультацию психолог�
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('payment-form');
-    
+    if (!form) return;
+
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        
+
         const amountInput = document.getElementById('amount-input');
-        const amount = amountInput.value;
-        
-        if (!amount || parseFloat(amount) < 1) {
+        if (!amountInput || !(amountInput instanceof HTMLInputElement)) {
+            alert('Ошибка: не удалось найти поле для ввода суммы');
+            return;
+        }
+
+        const amountStr = amountInput.value.trim();
+        const amountNum = parseFloat(amountStr);
+        if (!amountStr || isNaN(amountNum) || amountNum < 1) {
             alert('Пожалуйста, введите корректную сумму');
             return;
         }
-        
+
         // Генерируем уникальный номер заказа
         const orderId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        
+
         // Параметры для Альфа-Банка
         const params = new URLSearchParams({
             userName: 'ALESYATAKUN-api',
             password: 'Aupsawh%5+YesNP',
             orderNumber: orderId,
-            amount: String(Math.round(parseFloat(amount) * 100)), // в копейках
+            amount: String(Math.round(amountNum * 100)), // в копейках
             currency: '933', // BYN
             returnUrl: 'https://alesyatakun.by/thanks/',
             failUrl: 'https://alesyatakun.by/?status=fail',
             description: `Order ${orderId}`
         });
-        
+
         // Создаем форму для отправки на Альфа-Банк
-        const form = document.createElement('form');
-        form.method = 'GET';
-        form.action = 'https://ecom.alfabank.by/payment/rest/register.do';
-        form.target = '_self';
-        
+        const bankForm = document.createElement('form');
+        bankForm.method = 'GET';
+        bankForm.action = 'https://ecom.alfabank.by/payment/rest/register.do';
+        bankForm.target = '_self';
+
         // Добавляем параметры как скрытые поля
         params.forEach((value, key) => {
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = key;
             input.value = value;
-            form.appendChild(input);
+            bankForm.appendChild(input);
         });
-        
+
         // Добавляем форму в DOM и отправляем
-        document.body.appendChild(form);
-        form.submit();
+        document.body.appendChild(bankForm);
+        bankForm.submit();
     });
 });
 </script>
