@@ -5,10 +5,7 @@
 [build.environment]
   NODE_VERSION = "18"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Удалили catch-all редирект 200, чтобы API маршруты SSR работали корректно
 
 [[headers]]
   for = "/*"
