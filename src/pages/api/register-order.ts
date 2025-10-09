@@ -35,9 +35,16 @@ export async function POST({ request }: APIContext) {
       });
     }
 
-    // Используем тестовые данные для разработки
-    const ALFA_API_LOGIN = 'ALESYATAKUN-api';
-    const ALFA_API_PASSWORD = 'Aupsawh%5+YesNP';
+    // Читаем креды из ENV (на проде обязателены)
+    const ALFA_API_LOGIN = process.env.ALFA_API_LOGIN;
+    const ALFA_API_PASSWORD = process.env.ALFA_API_PASSWORD;
+
+    if (!ALFA_API_LOGIN || !ALFA_API_PASSWORD) {
+      return new Response(JSON.stringify({ success: false, error: 'Bank credentials not configured' }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
 
     // Альфа ждёт сумму в копейках BYN (minor units)
     const amountMinor = Math.round(amount * 100);
@@ -48,8 +55,8 @@ export async function POST({ request }: APIContext) {
       orderNumber,
       amount: String(amountMinor),
       currency: '933',                  // BYN
-      returnUrl: returnUrl || `${request.headers.get('origin') || 'http://localhost:4321'}/thanks/`,
-      failUrl: failUrl || `${request.headers.get('origin') || 'http://localhost:4321'}/?status=fail`,
+      returnUrl: returnUrl || 'https://alesyatakun.by/thanks/',
+      failUrl: failUrl || 'https://alesyatakun.by/?status=fail',
       description: `Order ${orderNumber}`
     });
 

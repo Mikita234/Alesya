@@ -5,6 +5,9 @@
 [build.environment]
   NODE_VERSION = "18"
 
+[functions]
+  node_bundler = "esbuild"
+
 # Удалили catch-all редирект 200, чтобы API маршруты SSR работали корректно
 
 [[headers]]
