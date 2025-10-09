@@ -121,14 +121,14 @@ const description = "Психолог в Минске. Очный приём и 
         </div>
 
         <div class="service-types reveal">
-            <h4>Стоимость услуг</h4>
+            <h4 class="prices-title">Стоимость услуг</h4>
             <ul class="service-list price-list">
                 <li>
                     <span class="label">Индивидуальная консультация</span>
                     <span class="price">120 BYN</span>
                 </li>
                 <li>
-                    <span class="label">Онлайн-сессия</span>
+                    <span class="label">Онлайн‑сессия</span>
                     <span class="price">120 BYN</span>
                 </li>
                 <li>
@@ -669,6 +669,11 @@ const description = "Психолог в Минске. Очный приём и 
 .price-list .label{ color: var(--text); font-weight: 600; position: relative; }
 .price-list .price{ color: var(--text); font-weight: 600; justify-self: end; }
 .price-list .label::after{ content: ""; }
+
+/* Выровнять типографику и сделать аккуратнее */
+.prices-title { text-transform: uppercase; letter-spacing: .06em; }
+.price-list .price { font-variant-numeric: tabular-nums; }
+.price-list .label { line-height: 1.4; }
 
 /* Contacts */
 .contacts-grid {
