@@ -1031,6 +1031,29 @@ document.addEventListener('DOMContentLoaded', function() {
     margin: 0 auto !important;
 }
 
+/* Скрываем текст постов Instagram, оставляем только фото */
+.instagram-post .instagram-media blockquote,
+.instagram-post iframe {
+    overflow: hidden !important;
+}
+
+.instagram-post .instagram-media blockquote::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 10;
+}
+
+/* Скрываем текст в iframe Instagram */
+.instagram-post iframe {
+    height: 400px !important;
+    overflow: hidden !important;
+}
+
 .instagram-post.center {
 	order: 2;
 }
@@ -1087,6 +1110,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .instagram-post iframe {
             width: 100% !important;
             max-width: 100% !important;
+            height: 300px !important;
+            overflow: hidden !important;
         }
     
     	.instagram-post.center {
