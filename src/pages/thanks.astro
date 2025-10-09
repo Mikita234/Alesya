@@ -101,18 +101,17 @@ const amount = url.searchParams.get('amount');
 }
 
 .thanks-content {
-    max-width: 600px;
+    max-width: 560px;
     text-align: center;
     background: var(--bg-alt);
-    padding: 40px;
+    padding: 36px;
     border-radius: var(--radius);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-lg);
 }
 
-.success-icon {
-    margin-bottom: 24px;
-}
+.success-icon { margin-bottom: 20px; }
+.success-icon svg { width: 64px; height: 64px; }
 
 .thanks-content h1 {
     font-size: 2.5rem;
@@ -232,22 +231,19 @@ const amount = url.searchParams.get('amount');
 .telegram-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    color: var(--accent);
+    color: #fff;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     margin-top: 8px;
-    padding: 8px 16px;
-    background: rgba(99, 102, 241, 0.1);
-    border-radius: var(--radius-sm);
+    padding: 12px 18px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    border-radius: var(--radius);
     transition: var(--transition);
 }
 
-.telegram-link:hover {
-    background: var(--accent);
-    color: white;
-    transform: translateY(-1px);
-}
+.telegram-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
 .contact-info {
     margin: 32px 0;
@@ -335,37 +331,21 @@ const amount = url.searchParams.get('amount');
 }
 
 @media (max-width: 768px) {
-    .thanks-content {
-        padding: 24px 20px;
-    }
-    
-    .thanks-content h1 {
-        font-size: 2rem;
-    }
-    
-    .thanks-message {
-        font-size: 1.1rem;
-    }
-    
-    .actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .btn {
-        width: 100%;
-        max-width: none;
-        min-height: 48px;
-        touch-action: manipulation;
-    }
-    
-    .contact-methods {
-        align-items: stretch;
-    }
-    
-    .contact-method {
-        min-width: auto;
-        width: 100%;
-    }
+  .thanks-container { padding: 24px 12px; }
+  .thanks-content { padding: 20px 16px; border-radius: 12px; }
+  .success-icon svg { width: 56px; height: 56px; }
+  .thanks-content h1 { font-size: 1.8rem; margin-bottom: 10px; }
+  .thanks-message { font-size: 1rem; margin-bottom: 20px; }
+
+  .payment-info, .next-steps, .contact-info { padding: 16px; margin: 16px 0; }
+  .steps-list li { padding-left: 28px; margin-bottom: 14px; }
+  .steps-list li::before { width: 18px; height: 18px; font-size: 0.75rem; top: 2px; }
+
+  .telegram-link { width: 100%; padding: 14px; }
+
+  .actions { flex-direction: column; align-items: stretch; }
+  .btn { width: 100%; max-width: none; min-height: 48px; touch-action: manipulation; }
+  .contact-methods { align-items: stretch; }
+  .contact-method { min-width: auto; width: 100%; }
 }
 </style>
