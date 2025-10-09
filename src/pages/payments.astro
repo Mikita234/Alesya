@@ -38,7 +38,7 @@ const description = "Оплата услуг психолога Алеси Та�
 		<h2>Свободный платёж</h2>
 		<p>Введите любую сумму, которая вам подходит. Стандартная стоимость консультации — 150 BYN</p>
 		
-		<form class="free-payment" onsubmit="handlePaymentSubmit(event)">
+		<form class="free-payment" id="payment-form">
 			<div class="amount-input">
 				<label for="amount-input">Сумма (BYN)</label>
 				<input type="number" min="1" step="1" required placeholder="Введите сумму" id="amount-input" aria-describedby="amount-help" />
@@ -68,14 +68,23 @@ const description = "Оплата услуг психолога Алеси Та�
 		</div>
 	</div>
 
-	<div class="service-reference">
-		<h3>Справочно: стандартные тарифы</h3>
-		<ul class="service-list">
-			<li><strong>Индивидуальная консультация</strong> — 150 BYN</li>
-			<li><strong>Онлайн-сессия</strong> — 150 BYN</li>
-			<li><strong>Психологические группы</strong> — 100 BYN</li>
-		</ul>
-	</div>
+    <div class="service-reference">
+        <h3>Справочно: стандартные тарифы</h3>
+        <ul class="service-list price-list">
+            <li>
+                <span class="label">Индивидуальная консультация</span>
+                <span class="price">150 BYN</span>
+            </li>
+            <li>
+                <span class="label">Онлайн-сессия</span>
+                <span class="price">150 BYN</span>
+            </li>
+            <li>
+                <span class="label">Психологические группы</span>
+                <span class="price">100 BYN</span>
+            </li>
+        </ul>
+    </div>
 
 	<div class="service-types">
 		<h4>Безопасность платежей</h4>
@@ -86,11 +95,12 @@ const description = "Оплата услуг психолога Алеси Та�
 	<div class="integration-info">
 		<h4>🔧 Инструкции для подключения Альфа-Банк эквайринга:</h4>
 		<ol>
-			<li>Получите <code>merchant_id</code> от Альфа-Банка</li>
-			<li>Замените <code>YOUR_MERCHANT_ID</code> в коде на реальный ID</li>
-			<li>Настройте подпись запроса (signature) согласно документации банка</li>
-			<li>Замените <code>YOUR_SIGNATURE</code> на реальную подпись</li>
-			<li>Протестируйте на тестовом окружении</li>
+			<li>✅ Получен <code>merchant_id</code> от Альфа-Банка: <strong>ALESYATAKUN</strong></li>
+			<li>✅ Обновлен <code>merchant_id</code> в коде</li>
+			<li>✅ Реализована функция генерации подписи запроса</li>
+			<li>⏳ Получение секретного ключа от Альфа-Банка</li>
+			<li>⏳ Замена <code>YOUR_SECRET_KEY</code> на реальный ключ</li>
+			<li>⏳ Тестирование на боевом окружении</li>
 		</ol>
 		<p class="muted">После подключения провайдера, кнопки «Оплатить» будут вести на защищённую платёжную страницу Альфа-Банка.</p>
 	</div>
@@ -109,11 +119,10 @@ const description = "Оплата услуг психолога Алеси Та�
 
 <style>
 .service-info, .process-info {
-    background: var(--bg-alt);
-    padding: 24px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    margin: 16px 0;
+    background: transparent;
+    padding: 0;
+    border: 0;
+    margin: 24px 0;
     max-width: 100%;
 }
 
@@ -241,11 +250,10 @@ const description = "Оплата услуг психолога Алеси Та�
 }
 
 .service-reference {
-    background: var(--bg-alt);
-    padding: 24px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    margin: 16px 0;
+    background: transparent;
+    padding: 0;
+    border: 0;
+    margin: 24px 0;
     max-width: 100%;
 }
 
@@ -266,24 +274,30 @@ const description = "Оплата услуг психолога Алеси Та�
 }
 
 .service-list li {
-    padding: 16px 20px;
-    background: var(--bg);
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border);
+    padding: 12px 0;
+    background: transparent;
+    border-radius: 0;
+    border: 0;
     font-size: 1.1rem;
     color: var(--text-light);
-    transition: var(--transition);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
 }
 
-.service-list li:hover {
-    border-color: var(--accent-light);
-    transform: translateY(-1px);
-}
+.service-list li:hover { transform: none; }
 
 .service-list strong {
     color: var(--text);
     font-weight: 600;
 }
+
+/* Прайс-лист без «карточек» */
+.price-list li{ border-bottom: 1px solid var(--border); display:grid; grid-template-columns: 1fr auto; column-gap:12px; align-items: baseline; }
+.price-list li:last-child{ border-bottom: 0; }
+.price-list .label{ color: var(--text); font-weight: 600; position: relative; }
+.price-list .price{ color: var(--text); font-weight: 600; justify-self: end; }
+.price-list .label::after{ content: ""; }
 
 .btn { 
     display: inline-flex;
@@ -538,12 +552,22 @@ const description = "Оплата услуг психолога Алеси Та�
 </style>
 
 <script>
-function handlePaymentSubmit(event) {
+// Импортируем конфигурацию платежей
+import { getPaymentConfig } from '../config/payment.js';
+
+// Получаем конфигурацию для тестового окружения
+const paymentConfig = getPaymentConfig('test');
+
+async function handlePaymentSubmit(event: Event) {
+    console.log('🚀 Начинаем обработку платежа...');
     event.preventDefault();
-    const amountInput = document.getElementById('amount-input');
-    const amount = amountInput.value;
+    const amountInput = document.getElementById('amount-input') as HTMLInputElement;
+    const amount = amountInput?.value;
     
-    if (!amount || amount < 1) {
+    console.log('💰 Сумма (строка):', amount);
+    console.log('💰 Сумма (число):', parseFloat(amount));
+    
+    if (!amount || parseFloat(amount) < 1) {
         alert('Пожалуйста, введите корректную сумму');
         return;
     }
@@ -556,52 +580,78 @@ function handlePaymentSubmit(event) {
     
     // Генерируем уникальный номер заказа
     const orderId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    console.log('🆔 Номер заказа:', orderId);
     
-    // Параметры для Альфа-Банк эквайринга
-    const paymentParams = {
-        amount: amount,
-        currency: 'BYN',
-        order_id: orderId,
-        description: `Консультация психолога - ${amount} BYN`,
-        success_url: successUrl,
-        cancel_url: cancelUrl,
-        return_url: returnUrl,
-        merchant_id: 'YOUR_MERCHANT_ID', // Заменить на реальный ID мерчанта
-        signature: 'YOUR_SIGNATURE' // Заменить на реальную подпись
+    // Регистрируем заказ через наш серверный endpoint
+    console.log('📡 Отправляем запрос к API...');
+    
+    const requestData = {
+        amount: parseFloat(amount),
+        orderNumber: orderId
     };
     
-    // URL для редиректа на платежную страницу Альфа-Банка
-    const paymentUrl = `https://pay.alfabank.by/payment/merchants/YOUR_MERCHANT_ID/payment_ru.html?` + 
-        Object.keys(paymentParams).map(key => `${key}=${encodeURIComponent(paymentParams[key])}`).join('&');
+    console.log('📤 Данные для отправки:', requestData);
+    console.log('📤 JSON строка:', JSON.stringify(requestData));
     
-    // Пока что показываем информацию, после подключения - редирект
-    if (paymentParams.merchant_id === 'YOUR_MERCHANT_ID') {
-        alert(`Готово к интеграции с Альфа-Банк!\n\nСумма: ${amount} BYN\nНомер заказа: ${orderId}\n\nПосле подключения мерчанта будет редирект на: ${paymentUrl}\n\nСвяжитесь с @alesiatakun в Telegram для уточнения деталей.`);
-    } else {
+    try {
+        const response = await fetch('/api/register-order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        });
+        
+        console.log('📨 Получен ответ от сервера:', response.status);
+        
+        let data;
+        try {
+            data = await response.json(); // сервер обязан отдать JSON даже при ошибке
+        } catch (e) {
+            throw new Error(`Bad JSON from server, status ${response.status}`);
+        }
+
+        if (!response.ok || !data?.success) {
+            throw new Error(data?.error || `HTTP ${response.status}`);
+        }
+
+        console.log('✅ Успешно! Редиректим на:', data.formUrl);
         // Редирект на платежную страницу
-        window.location.href = paymentUrl;
+        window.location.href = data.formUrl;
+        
+    } catch (error) {
+        console.error('💥 Ошибка:', error);
+        alert(`Ошибка: ${error instanceof Error ? error.message : 'Неизвестная ошибка'}`);
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const amountInput = document.getElementById('amount-input');
+    const amountInput = document.getElementById('amount-input') as HTMLInputElement;
     const quickButtons = document.querySelectorAll('.btn-quick');
+    const paymentForm = document.getElementById('payment-form') as HTMLFormElement;
+    
+    // Добавляем обработчик формы
+    if (paymentForm) {
+        paymentForm.addEventListener('submit', handlePaymentSubmit);
+    }
     
     // Получаем сумму из URL параметров
     const urlParams = new URLSearchParams(window.location.search);
     const amountFromUrl = urlParams.get('amount');
     
     if (amountFromUrl && amountInput) {
-        amountInput.value = amountFromUrl;
+        (amountInput as HTMLInputElement).value = amountFromUrl;
     }
     
     quickButtons.forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(this: HTMLElement) {
             const amount = this.dataset.amount;
-            amountInput.value = amount;
+            if (amountInput && amount) {
+                (amountInput as HTMLInputElement).value = amount;
+            }
             
             // Подсветка активной кнопки
-            quickButtons.forEach(btn => btn.classList.remove('active'));
+            quickButtons.forEach((btn: Element) => btn.classList.remove('active'));
             this.classList.add('active');
         });
     });
