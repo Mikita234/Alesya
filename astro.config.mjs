@@ -5,7 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
     site: 'https://alesyatakun.by',
     base: '/',
-    output: 'static',
+    output: 'server',
     build: {
         assets: '_assets'
     }

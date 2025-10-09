@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = "Оплата консультации | Алеся Такун — психолог";
+const description = "Оплатите консультацию психолога Алеси Такун онлайн. Безопасная оплата через Альфа-Банк.";
+---
+
+<Layout title={title} description={description}>
+    <div class="payment-container">
+        <div class="payment-content">
+            <h1>Оплата консультации</h1>
+            <p class="payment-description">Выберите сумму и перейдите к оплате через Альфа-Банк</p>
+            
+            <form id="payment-form" class="payment-form">
+                <div class="form-group">
+                    <label for="amount-input">Сумма (BYN):</label>
+                    <input 
+                        type="number" 
+                        id="amount-input" 
+                        name="amount" 
+                        min="1" 
+                        step="0.01" 
+                        placeholder="85.00" 
+                        required
+                    >
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    Перейти к оплате
+                </button>
+            </form>
+            
+            <div class="payment-info">
+                <h3>Информация об оплате:</h3>
+                <ul>
+                    <li>✅ Безопасная оплата через Альфа-Банк</li>
+                    <li>✅ Поддержка карт Visa, Mastercard, БЕЛКАРТ</li>
+                    <li>✅ Мгновенное подтверждение</li>
+                    <li>✅ Возврат средств при отмене</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<style>
+.payment-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.payment-content {
+    max-width: 500px;
+    width: 100%;
+    background: var(--bg-alt);
+    padding: 40px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+}
+
+.payment-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+.payment-description {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 32px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.payment-form {
+    margin-bottom: 32px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    background: var(--bg);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.btn {
+    width: 100%;
+    padding: 16px 24px;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.payment-info {
+    background: var(--bg);
+    padding: 24px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.payment-info h3 {
+    font-size: 1.25rem;
+    color: var(--text);
+    margin: 0 0 16px 0;
+}
+
+.payment-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.payment-info li {
+    padding: 8px 0;
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .payment-content {
+        padding: 24px 20px;
+    }
+    
+    .payment-content h1 {
+        font-size: 2rem;
+    }
+    
+    .payment-description {
+        font-size: 1.1rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('payment-form');
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const amountInput = document.getElementById('amount-input');
+        const amount = amountInput.value;
+        
+        if (!amount || parseFloat(amount) < 1) {
+            alert('Пожалуйста, введите корректную сумму');
+            return;
+        }
+        
+        // Генерируем уникальный номер заказа
+        const orderId = 'ORDER_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        
+        // Параметры для Альфа-Банка
+        const params = new URLSearchParams({
+            userName: 'ALESYATAKUN-api',
+            password: 'Aupsawh%5+YesNP',
+            orderNumber: orderId,
+            amount: String(Math.round(parseFloat(amount) * 100)), // в копейках
+            currency: '933', // BYN
+            returnUrl: 'https://alesyatakun.by/thanks/',
+            failUrl: 'https://alesyatakun.by/?status=fail',
+            description: `Order ${orderId}`
+        });
+        
+        // Создаем форму для отправки на Альфа-Банк
+        const form = document.createElement('form');
+        form.method = 'GET';
+        form.action = 'https://ecom.alfabank.by/payment/rest/register.do';
+        form.target = '_self';
+        
+        // Добавляем параметры как скрытые поля
+        params.forEach((value, key) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = value;
+            form.appendChild(input);
+        });
+        
+        // Добавляем форму в DOM и отправляем
+        document.body.appendChild(form);
+        form.submit();
+    });
+});
+</script>
