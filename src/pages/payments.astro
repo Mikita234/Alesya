@@ -181,7 +181,7 @@ const description = "Оплата услуг психолога Алеси Та�
 
 .free-payment {
     max-width: 400px;
-    margin: 0 auto 32px auto;
+    margin: 24px 0;
 }
 
 .amount-input {
@@ -205,9 +205,7 @@ const description = "Оплата услуг психолога Алеси Та�
     color: var(--text);
 }
 
-.amount-input input::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-}
+.amount-input input::placeholder { color: var(--muted); }
 
 .amount-input input:focus {
     outline: none;
@@ -223,10 +221,10 @@ const description = "Оплата услуг психолога Алеси Та�
 }
 
 .btn-large {
-    font-size: 1.05rem;
-    padding: 14px 20px;
-    background: var(--accent);
-    color: #fff;
+    font-size: 1.2rem;
+    padding: 16px 32px;
+    background: #fff;
+    color: var(--accent);
     font-weight: 700;
     border: none;
     border-radius: var(--radius);
@@ -234,10 +232,7 @@ const description = "Оплата услуг психолога Алеси Та�
     transition: var(--transition);
 }
 
-.btn-large:hover {
-    background: var(--accent-dark);
-    transform: translateY(-2px);
-}
+.btn-large:hover { background: var(--bg-alt); transform: translateY(-2px); }
 
 .service-reference {
     background: transparent;
@@ -421,27 +416,11 @@ const description = "Оплата услуг психолога Алеси Та�
 
 
 
-.consent {
-    margin: 12px 0 16px;
-    text-align: center;
-}
-.consent-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: rgba(255,255,255,0.95);
-}
-.consent-label a { 
-    color: #fff; 
-    text-decoration: underline; 
-    font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
+.consent { margin: 12px 0 16px; text-align: left; }
+.consent-label { display: inline-flex; align-items: center; gap: 8px; color: var(--text-light); }
+.consent-label a { color: var(--accent); text-decoration: underline; font-weight: 600; }
 
-.consent-label a:hover { 
-    color: #f0f9ff; 
-    text-decoration: none;
-}
+.consent-label a:hover { text-decoration: none; }
 
 /* Mobile Styles */
 @media (max-width: 768px) {
