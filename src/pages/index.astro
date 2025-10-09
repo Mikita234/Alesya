@@ -67,7 +67,7 @@ const description = "Психолог в Минске. Очный приём и 
         
         <div class="payment-main reveal">
             <h3>Свободный платёж</h3>
-            <p>Введите сумму, которая вам подходит. Стандартная стоимость консультации — 150 BYN</p>
+            <p>Введите сумму, которая вам подходит. Стандартная стоимость консультации — <strong>120 BYN</strong></p>
             
             <form class="free-payment" onsubmit="handlePaymentSubmit(event)">
                 <div class="amount-input">
@@ -125,11 +125,11 @@ const description = "Психолог в Минске. Очный приём и 
             <ul class="service-list price-list">
                 <li>
                     <span class="label">Индивидуальная консультация</span>
-                    <span class="price">150 BYN</span>
+                    <span class="price">120 BYN</span>
                 </li>
                 <li>
                     <span class="label">Онлайн-сессия</span>
-                    <span class="price">150 BYN</span>
+                    <span class="price">120 BYN</span>
                 </li>
                 <li>
                     <span class="label">Психологические группы</span>
@@ -918,7 +918,7 @@ function handlePaymentSubmit(event) {
     
     // Переходим на страницу оплаты с параметрами для Альфа-Банк
     const baseUrl = window.location.origin + window.location.pathname.replace('index.html', '');
-    const paymentsUrl = `${baseUrl}payments/?amount=${amount}&success_url=${encodeURIComponent(baseUrl + 'thanks/')}&cancel_url=${encodeURIComponent(baseUrl + '?status=cancel')}&return_url=${encodeURIComponent(baseUrl + 'thanks/')}`;
+    const paymentsUrl = `${baseUrl}payments/?amount=${encodeURIComponent(amount)}&success_url=${encodeURIComponent('https://alesyatakun.by/thanks/')}&cancel_url=${encodeURIComponent('https://alesyatakun.by/?status=cancel')}&return_url=${encodeURIComponent('https://alesyatakun.by/thanks/')}`;
     
     window.location.href = paymentsUrl;
 }
@@ -1051,9 +1051,9 @@ document.addEventListener('DOMContentLoaded', function() {
     		gap: 16px;
     	}
     
-    	.instagram-post iframe {
+    .instagram-post iframe {
     		width: 100%;
-    		height: 420px;
+        height: 520px;
     		max-width: none;
     	}
     
