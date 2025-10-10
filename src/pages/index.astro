@@ -9,8 +9,8 @@ const description = "Психолог в Минске. Очный приём и 
     <div class="hero reveal">
         <div class="hero-content">
             <div class="eyebrow">Психолог в Минске</div>
-            <h1><span class="bracket">Алеся Такун</span></h1>
-            <p class="subtitle">Алеся Такун — психолог, гештальт‑консультант. Работаю со взрослыми индивидуально и веду психологические группы.</p>
+            <h1>Алеся Такун</h1>
+            <p class="subtitle">Психолог, гештальт‑консультант. Работаю со взрослыми индивидуально и веду психологические группы.</p>
             <p class="lede">Бережно и прямо. Делаю сложное — посильным. Помогаю проживать опыт, говорить честно и находить внутренние опоры.</p>
             <p><strong>Важно понимать:</strong></p>
             <ul class="important-list">
@@ -35,7 +35,7 @@ const description = "Психолог в Минске. Очный приём и 
         
         <div class="service-format reveal">
             <h3>Индивидуальная консультация</h3>
-            <p>На консультациях мы разбираем то, что часто становится тяжёлым грузом:</p>
+            <p><strong>На консультациях мы разбираем то, что часто становится тяжёлым грузом:</strong></p>
             <ul class="service-list">
                 <li>последствия КПТСР и травматического опыта</li>
                 <li>эмоциональное выгорание</li>
@@ -112,8 +112,8 @@ const description = "Психолог в Минске. Очный приём и 
         <div class="service-types reveal">
             <h4>Как записаться в группу</h4>
             <ol class="process-list">
-                <li>Вы выбираете группу (очно или онлайн)</li>
-                <li>Пишите мне в телеграм @alesiatakun для записи</li>
+                <li>Выберите группу (очно или онлайн)</li>
+                <li>Напишите мне в Telegram @alesiatakun для записи</li>
                 <li>Мы с вами созваниваемся на предварительную встречу по видео (Google Meet, Zoom, телеграм) на 15-20 мин, для знакомства и сверки насколько вам подходит данный формат</li>
                 <li>Вы оплачиваете через сайт</li>
                 <li>Проведение групповой встречи онлайн или офлайн по договорённости</li>
@@ -164,7 +164,7 @@ const description = "Психолог в Минске. Очный приём и 
             </div>
 
             <div class="instagram-post center">
-                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DF_IwnlI6Au/" data-instgrm-version="14"></blockquote>
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DBcTMAPIcxt/" data-instgrm-version="14"></blockquote>
             </div>
 
             <div class="instagram-post">
@@ -187,6 +187,26 @@ const description = "Психолог в Минске. Очный приём и 
     margin: 40px 0 80px; 
     padding: 40px 0;
     position: relative;
+}
+
+/* Мобильная версия - фото на первом экране */
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin: 20px 0 40px;
+        padding: 20px 0;
+    }
+    
+    .hero-photo {
+        order: -1;
+    }
+}
+
+/* Исправляем проблему с горизонтальным скроллом на мобиле */
+html, body {
+    overflow-x: hidden;
+    max-width: 100%;
 }
 
 .hero-content h1 { 
@@ -1035,9 +1055,21 @@ document.addEventListener('DOMContentLoaded', function() {
 .instagram-post .instagram-media blockquote,
 .instagram-post iframe {
     overflow: hidden !important;
+    position: relative;
 }
 
-.instagram-post .instagram-media blockquote::after {
+/* Скрываем текст в iframe Instagram */
+.instagram-post iframe {
+    height: 400px !important;
+    overflow: hidden !important;
+}
+
+/* Дополнительно скрываем текст постов */
+.instagram-post .instagram-media {
+    position: relative;
+}
+
+.instagram-post .instagram-media::after {
     content: '';
     position: absolute;
     top: 0;
@@ -1046,12 +1078,7 @@ document.addEventListener('DOMContentLoaded', function() {
     bottom: 0;
     background: transparent;
     z-index: 10;
-}
-
-/* Скрываем текст в iframe Instagram */
-.instagram-post iframe {
-    height: 400px !important;
-    overflow: hidden !important;
+    pointer-events: none;
 }
 
 .instagram-post.center {
