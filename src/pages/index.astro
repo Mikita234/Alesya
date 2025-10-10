@@ -174,23 +174,18 @@ const description = "Психолог в Минске. Очный приём и 
         <p>Следите за моими постами о психологии и личном развитии</p>
         <div class="instagram-posts">
             <div class="instagram-post">
-                <a href="https://www.instagram.com/p/DObmtC8jT1w/" target="_blank" rel="noopener noreferrer">
-                    <img src={`${import.meta.env.BASE_URL}instagram1.jpg`} alt="Instagram пост" loading="lazy" />
-                </a>
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DObmtC8jT1w/" data-instgrm-version="14"></blockquote>
             </div>
 
             <div class="instagram-post center">
-                <a href="https://www.instagram.com/p/DBcTMAPIcxt/" target="_blank" rel="noopener noreferrer">
-                    <img src={`${import.meta.env.BASE_URL}instagram2.jpg`} alt="Instagram пост" loading="lazy" />
-                </a>
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DBcTMAPIcxt/" data-instgrm-version="14"></blockquote>
             </div>
 
             <div class="instagram-post">
-                <a href="https://www.instagram.com/p/DNNpZr-IXi3/" target="_blank" rel="noopener noreferrer">
-                    <img src={`${import.meta.env.BASE_URL}instagram3.jpg`} alt="Instagram пост" loading="lazy" />
-                </a>
+                <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DNNpZr-IXi3/" data-instgrm-version="14"></blockquote>
             </div>
         </div>
+        <script async src="https://www.instagram.com/embed.js"></script>
     </section>
 
 </Layout>
@@ -1140,23 +1135,39 @@ document.addEventListener('DOMContentLoaded', function() {
     margin: 0 auto !important;
 }
 
-/* Instagram посты - обычные изображения */
-.instagram-post a {
-    display: block;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.instagram-post a:hover {
-    transform: translateY(-4px);
-}
-
-.instagram-post img {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
+/* Instagram посты - скрываем текст, оставляем только фото */
+.instagram-post .instagram-media,
+.instagram-post iframe {
+    border-radius: 12px !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: var(--transition);
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    overflow: hidden !important;
+}
+
+.instagram-post iframe {
+    height: 400px !important;
+}
+
+/* Скрываем все текстовые элементы в Instagram embed */
+.instagram-post .instagram-media * {
+    color: transparent !important;
+    text-shadow: none !important;
+}
+
+/* Показываем только изображения */
+.instagram-post .instagram-media img {
+    display: block !important;
+    opacity: 1 !important;
+}
+
+/* Скрываем все остальные элементы */
+.instagram-post .instagram-media blockquote,
+.instagram-post .instagram-media p,
+.instagram-post .instagram-media span,
+.instagram-post .instagram-media div:not(:has(img)) {
+    display: none !important;
 }
 
 .instagram-post.center {
