@@ -193,49 +193,12 @@ const description = "Психолог в Минске. Очный приём и 
 /* Hero Section */
 .hero { 
     display: grid; 
-    grid-template-columns: 1.2fr 0.8fr; 
-    gap: 64px; 
-    align-items: center; 
-    margin: 0; 
-    padding: 64px 0;
+    grid-template-columns: 1fr 400px; 
+    gap: 48px; 
+    align-items: start; 
+    margin: 40px 0 80px; 
+    padding: 40px 0;
     position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: 16px;
-    padding-right: 16px;
-}
-
-@media (min-width: 1024px) {
-    .hero {
-        grid-template-columns: 1.2fr 0.8fr;
-    }
-}
-
-@media (max-width: 1023px) {
-    .hero {
-        grid-template-columns: 1fr 1fr;
-        gap: 48px;
-    }
-}
-
-/* Мобильная версия - фото на первом экране */
-@media (max-width: 768px) {
-    .hero {
-        grid-template-columns: 1fr;
-        gap: 24px;
-        margin: 0;
-        padding: 16px 0;
-        min-height: auto;
-    }
-    
-    .hero-photo {
-        order: -1;
-        margin-bottom: 0;
-    }
-    
-    .hero-content {
-        padding-top: 0;
-    }
 }
 
 /* Исправляем проблему с горизонтальным скроллом на мобиле */
@@ -247,19 +210,9 @@ html, body {
 /* Секции с фотками */
 .section-with-photo {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 64px;
+    grid-template-columns: 1fr 400px;
+    gap: 48px;
     align-items: start;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: 16px;
-    padding-right: 16px;
-}
-
-@media (min-width: 1280px) {
-    .section-with-photo {
-        gap: 80px;
-    }
 }
 
 .section-photo {
@@ -268,11 +221,10 @@ html, body {
 
 .section-photo img {
     width: 100%;
-    aspect-ratio: 3/4;
+    height: auto;
+    border-radius: var(--radius);
     object-fit: cover;
-    object-position: 50% 30%;
-    border-radius: 24px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
     transition: var(--transition);
 }
 
@@ -283,19 +235,9 @@ html, body {
 
 .service-types-with-photo {
     display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 64px;
+    grid-template-columns: 1fr 400px;
+    gap: 48px;
     align-items: start;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: 16px;
-    padding-right: 16px;
-}
-
-@media (min-width: 1280px) {
-    .service-types-with-photo {
-        gap: 80px;
-    }
 }
 
 .service-types-photo {
@@ -304,11 +246,10 @@ html, body {
 
 .service-types-photo img {
     width: 100%;
-    aspect-ratio: 3/4;
+    height: auto;
+    border-radius: var(--radius);
     object-fit: cover;
-    object-position: 50% 30%;
-    border-radius: 24px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
     transition: var(--transition);
 }
 
@@ -328,6 +269,14 @@ html, body {
     .section-photo,
     .service-types-photo {
         order: -1;
+        max-width: 100%;
+    }
+    
+    .section-photo img,
+    .service-types-photo img {
+        max-width: 280px;
+        margin: 0 auto;
+        display: block;
     }
 }
 
@@ -365,16 +314,12 @@ html, body {
 }
 
 .hero-photo img { 
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    aspect-ratio: 3/4;
+    width: 100%; 
+    height: auto; 
+    border-radius: var(--radius); 
     object-fit: cover;
-    object-position: 50% 30%;
-    border-radius: 24px; 
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-lg);
     transition: var(--transition);
-    display: block;
 }
 
 .hero-photo img:hover {
@@ -415,11 +360,6 @@ html, body {
     flex-wrap:wrap; 
     margin-top: 24px;
 }
-
-.cta-row .btn {
-    height: 48px;
-    min-height: 48px;
-}
 /* фоновое мягкое пятно */
 .hero::after{
     content:""; position:absolute; inset:-10% -20% auto auto; width:40vw; height:40vw; max-width:520px; max-height:520px; filter: blur(60px);
@@ -448,7 +388,7 @@ html, body {
 .important-list {
     list-style: none;
     padding: 0;
-    margin: 32px 0 0 0;
+    margin: 16px 0;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -461,12 +401,8 @@ html, body {
     background: #F3F2EF;
     border: 1px solid #E7E4DE;
     border-radius: 9999px;
-    padding: 8px 16px;
+    padding: 8px 12px;
     font-weight: 600;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
 }
 
 /* Service formats */
@@ -919,16 +855,19 @@ html, body {
     }
     
     .hero-photo { 
-        order: -1; 
-        width: 100%;
+        order: -1;
         max-width: 100%;
-        margin: 0;
+        margin: 0 auto;
+    }
+    
+    .hero-photo img {
+        max-width: 280px;
+        margin: 0 auto;
+        display: block;
     }
 
     .hero-content {
         padding-top: 0;
-        word-break: break-word;
-        overflow-wrap: anywhere;
     }
     
     .section { 
