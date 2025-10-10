@@ -78,10 +78,11 @@ const description = "Психолог в Минске. Очный приём и 
             <p>Введите сумму, которая вам подходит. Стандартная стоимость консультации — <strong>120 BYN</strong></p>
             
             <form class="free-payment" id="home-payment-form">
-                <div class="amount-input">
+                <div class="amount-input" id="amount-input-wrapper">
                     <label for="amount-input">Сумма (BYN)</label>
                     <input type="number" name="amount" min="1" step="1" required placeholder="Введите сумму" id="amount-input" aria-describedby="amount-help" />
                     <small id="amount-help" class="input-help">Минимальная сумма: 1 BYN</small>
+                    <div class="validation-message" id="validation-message"></div>
                 </div>
                 <div class="consent">
                     <label class="consent-label">
@@ -186,6 +187,16 @@ const description = "Психолог в Минске. Очный приём и 
         </div>
         <script async src="https://www.instagram.com/embed.js"></script>
     </section>
+
+    <!-- Floating кнопка на мобилке -->
+    <div class="floating-cta">
+        <a href={`${import.meta.env.BASE_URL}payments/`} class="btn btn-primary">Записаться</a>
+    </div>
+
+    <!-- Индикатор загрузки -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+    </div>
 
 </Layout>
 
@@ -343,12 +354,43 @@ html, body {
     box-shadow: var(--shadow);
     border: none;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn:hover { 
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
     background: var(--accent-dark);
+}
+
+/* Focus states для accessibility */
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Ripple эффект */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+    width: 300px;
+    height: 300px;
 }
 .btn-primary{ background: var(--accent); color:#fff; }
 .btn-ghost{ background: transparent; color: var(--text); border:1px solid var(--border); }
@@ -367,9 +409,22 @@ html, body {
     pointer-events:none; z-index:-1;
 }
 
-/* Reveal анимации */
-.reveal{ opacity:0; transform: translateY(12px); animation: reveal .5s ease forwards; }
-@keyframes reveal{ to{ opacity:1; transform:none } }
+/* Reveal анимации - улучшенные */
+.reveal{ 
+    opacity: 0; 
+    transform: translateY(30px); 
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal.active { 
+    opacity: 1; 
+    transform: translateY(0);
+}
+
+/* Плавная прокрутка */
+html {
+    scroll-behavior: smooth;
+}
 
 /* Sections */
 .section { 
@@ -397,7 +452,7 @@ html, body {
 .important-list li {
     margin: 0;
     color: var(--text);
-    line-height: 1.4;
+    line-height: 1.6;
     background: #F3F2EF;
     border: 1px solid #E7E4DE;
     border-radius: 9999px;
@@ -583,13 +638,14 @@ html, body {
 .btn-large {
     font-size: 1.2rem;
     padding: 16px 32px;
-    background: white;
-    color: var(--accent);
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
     font-weight: 700;
+    border: none;
 }
 
 .btn-large:hover {
-    background: var(--bg-alt);
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
     transform: translateY(-2px);
 }
 
@@ -708,10 +764,12 @@ html, body {
 }
 
 .btn-quick.active {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: white;
+    background: var(--accent);
+    border-color: var(--accent);
     color: white;
     font-weight: 600;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .service-types {
@@ -726,7 +784,7 @@ html, body {
 .service-types h4 {
     font-size: 1.25rem;
     font-weight: 600;
-    margin: 0 0 20px 0;
+    margin: 40px 0 20px 0;
     color: var(--text);
     text-align: left;
 }
@@ -1057,17 +1115,144 @@ html, body {
         line-height: 1.2;
     }
 }
+
+/* Floating кнопка на мобилке */
+.floating-cta {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    display: none;
+    transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .floating-cta {
+        display: block;
+    }
+    
+    .floating-cta .btn {
+        padding: 14px 24px;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+        animation: float 3s ease-in-out infinite;
+    }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Индикатор загрузки */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Валидация в реальном времени */
+.amount-input.error input {
+    border-color: #ef4444;
+}
+
+.amount-input.success input {
+    border-color: #10b981;
+}
+
+.validation-message {
+    display: none;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.validation-message.error {
+    display: block;
+    color: #ef4444;
+}
+
+.validation-message.success {
+    display: block;
+    color: #10b981;
+}
 </style>
 
 <script>
+// Валидация в реальном времени
+function validateAmount(value: string) {
+    const wrapper = document.getElementById('amount-input-wrapper');
+    const message = document.getElementById('validation-message');
+    const amount = parseFloat(value);
+    
+    if (!wrapper || !message) return true;
+    
+    wrapper.classList.remove('error', 'success');
+    message.classList.remove('error', 'success');
+    message.textContent = '';
+    
+    if (!value || value === '') {
+        return false;
+    }
+    
+    if (isNaN(amount) || amount < 1) {
+        wrapper.classList.add('error');
+        message.classList.add('error');
+        message.textContent = 'Минимальная сумма: 1 BYN';
+        return false;
+    }
+    
+    if (amount > 10000) {
+        wrapper.classList.add('error');
+        message.classList.add('error');
+        message.textContent = 'Максимальная сумма: 10000 BYN';
+        return false;
+    }
+    
+    wrapper.classList.add('success');
+    message.classList.add('success');
+    message.textContent = '✓ Сумма корректна';
+    return true;
+}
+
 async function submitHomePayment(event: Event){
     event.preventDefault();
     const input = document.getElementById('amount-input') as HTMLInputElement;
+    const loadingOverlay = document.getElementById('loading-overlay');
+    
     if(!input) return;
     const amount = parseFloat(input.value);
-    if(!amount || amount < 1){
-        alert('Пожалуйста, введите корректную сумму');
+    
+    if(!validateAmount(input.value)){
         return;
+    }
+
+    // Показываем индикатор загрузки
+    if (loadingOverlay) {
+        loadingOverlay.classList.add('active');
     }
 
     try{
@@ -1082,44 +1267,99 @@ async function submitHomePayment(event: Event){
         }
         window.location.href = data.formUrl;
     }catch(err){
+        // Скрываем индикатор загрузки
+        if (loadingOverlay) {
+            loadingOverlay.classList.remove('active');
+        }
         alert(`Ошибка: ${err instanceof Error ? err.message : 'Неизвестная ошибка'}`);
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     const quickButtons = document.querySelectorAll('.btn-quick');
-    const amountInput = document.getElementById('amount-input');
+    const amountInput = document.getElementById('amount-input') as HTMLInputElement;
     const form = document.getElementById('home-payment-form');
+    
     if(form){ form.addEventListener('submit', submitHomePayment); }
+    
+    // Валидация в реальном времени
+    if (amountInput) {
+        amountInput.addEventListener('input', function() {
+            validateAmount(this.value);
+        });
+        
+        amountInput.addEventListener('blur', function() {
+            validateAmount(this.value);
+        });
+    }
     
     // Обработка статусов оплаты
     const urlParams = new URLSearchParams(window.location.search);
     const status = urlParams.get('status');
     
     if (status === 'success') {
-        // Показываем сообщение об успешной оплате
         setTimeout(() => {
             alert('✅ Оплата прошла успешно!\n\nСвяжитесь с @alesiatakun в Telegram для выбора времени консультации.');
         }, 500);
     } else if (status === 'cancel') {
-        // Показываем сообщение об отмене
         setTimeout(() => {
             alert('❌ Оплата была отменена.\n\nЕсли у вас возникли вопросы, свяжитесь с @alesiatakun в Telegram.');
         }, 500);
     }
     
+    // Быстрые кнопки сумм
     if (quickButtons.length > 0 && amountInput) {
         quickButtons.forEach(button => {
             button.addEventListener('click', function(this: HTMLButtonElement) {
                 const amount = this.getAttribute('data-amount');
                 if (amountInput && amount) {
                     amountInput.value = amount;
+                    validateAmount(amount);
                 }
                 
-                // Подсветка активной кнопки
                 quickButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
             });
+        });
+    }
+    
+    // Reveal анимация при скролле
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    revealElements.forEach(el => revealObserver.observe(el));
+    
+    // Скрытие floating кнопки при скролле вниз
+    let lastScroll = 0;
+    const floatingCta = document.querySelector('.floating-cta') as HTMLElement;
+    
+    if (floatingCta) {
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 300) {
+                floatingCta.style.display = 'block';
+                
+                if (currentScroll > lastScroll) {
+                    floatingCta.style.transform = 'translateY(100px)';
+                } else {
+                    floatingCta.style.transform = 'translateY(0)';
+                }
+            } else {
+                floatingCta.style.display = 'none';
+            }
+            
+            lastScroll = currentScroll;
         });
     }
 });
