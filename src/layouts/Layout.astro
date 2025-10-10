@@ -810,8 +810,13 @@ p, li{ letter-spacing:0.002em; }
         text-align: center;
         border-radius: var(--radius);
     }
-    .payment-logo-black,
+    .payment-logo-black {
+        display: none !important;
+    }
+    
     .payment-logo-white {
+        position: static !important;
+        opacity: 1 !important;
         height: 50px;
         max-width: 100%;
         width: auto;
