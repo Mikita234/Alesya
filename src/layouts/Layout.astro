@@ -277,6 +277,10 @@
                         <li><a class="nav-link" href={`${import.meta.env.BASE_URL}payments/`}>Оплата</a></li>
                         <li><a class="nav-link" href={`${import.meta.env.BASE_URL}oferta/`}>Договор</a></li>
                     </ul>
+                    <div class="header-actions">
+                        <a href={`${import.meta.env.BASE_URL}payments/`} class="btn btn-primary btn-sm">Записаться</a>
+                        <a href="https://t.me/alesiatakun" target="_blank" class="btn btn-ghost btn-sm">Telegram</a>
+                    </div>
             </nav>
         </header>
         <main class="container" role="main" id="main-content">
@@ -468,6 +472,7 @@ p, li{ letter-spacing:0.002em; }
     align-items: center; 
     justify-content: space-between; 
     padding: 16px 24px; 
+    gap: 24px;
 }
 
 .logo { 
@@ -483,9 +488,24 @@ p, li{ letter-spacing:0.002em; }
 .nav-list { 
     list-style: none; 
     display: flex; 
-    gap: 8px; 
+    gap: 32px; 
     margin: 0; 
     padding: 0; 
+    flex: 1;
+    justify-content: center;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 14px;
+    height: 36px;
+    min-height: 36px;
 }
 
 .nav-list a { 
@@ -728,6 +748,10 @@ p, li{ letter-spacing:0.002em; }
 @media (max-width: 768px) {
     .mobile-menu-toggle {
         display: flex;
+    }
+    
+    .header-actions {
+        display: none;
     }
     
     .nav-list {

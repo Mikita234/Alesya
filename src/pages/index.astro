@@ -26,7 +26,7 @@ const description = "Психолог в Минске. Очный приём и 
             </div>
 		</div>
         <div class="hero-photo">
-            <img src={`${import.meta.env.BASE_URL}photo1.jpg`} alt="Алеся Такун" width="350" height="450" loading="eager" decoding="async" fetchpriority="high" />
+            <img src={`${import.meta.env.BASE_URL}photo1.jpg`} alt="Алеся Такун: портрет, взгляд в камеру" width="350" height="450" loading="eager" decoding="async" fetchpriority="high" />
         </div>
 	</div>
     
@@ -64,7 +64,7 @@ const description = "Психолог в Минске. Очный приём и 
             </div>
             
             <div class="section-photo">
-                <img src={`${import.meta.env.BASE_URL}photo2.jpg`} alt="Алеся Такун - психолог" width="350" height="450" loading="lazy" />
+                <img src={`${import.meta.env.BASE_URL}photo2.jpg`} alt="Алеся Такун на консультации" width="350" height="450" loading="lazy" decoding="async" />
             </div>
         </div>
     </section>
@@ -100,7 +100,6 @@ const description = "Психолог в Минске. Очный приём и 
                     <button type="button" class="btn-quick" data-amount="90" aria-label="Выбрать сумму 90 BYN">90 BYN</button>
                     <button type="button" class="btn-quick" data-amount="100" aria-label="Выбрать сумму 100 BYN">100 BYN</button>
                     <button type="button" class="btn-quick" data-amount="120" aria-label="Выбрать сумму 120 BYN">120 BYN</button>
-                    <button type="button" class="btn-quick" data-amount="150" aria-label="Выбрать сумму 150 BYN">150 BYN</button>
                     <button type="button" class="btn-quick" data-amount="480" aria-label="Выбрать пакет 4 сессии за 480 BYN">4 сессии (480 BYN)</button>
                     <button type="button" class="btn-quick" data-amount="960" aria-label="Выбрать пакет 8 сессий за 960 BYN">8 сессий (960 BYN)</button>
                 </div>
@@ -130,7 +129,7 @@ const description = "Психолог в Минске. Очный приём и 
             </div>
             
             <div class="service-types-photo">
-                <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Групповые встречи" width="350" height="450" loading="lazy" />
+                <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Алеся на встрече группы" width="350" height="450" loading="lazy" decoding="async" />
             </div>
         </div>
 
@@ -194,12 +193,29 @@ const description = "Психолог в Минске. Очный приём и 
 /* Hero Section */
 .hero { 
     display: grid; 
-    grid-template-columns: 1.2fr 380px; 
-    gap: 48px; 
+    grid-template-columns: 1.2fr 0.8fr; 
+    gap: 64px; 
     align-items: center; 
-    margin: 40px 0 80px; 
-    padding: 40px 0;
+    margin: 0; 
+    padding: 64px 0;
     position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+@media (min-width: 1024px) {
+    .hero {
+        grid-template-columns: 1.2fr 0.8fr;
+    }
+}
+
+@media (max-width: 1023px) {
+    .hero {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+    }
 }
 
 /* Мобильная версия - фото на первом экране */
@@ -232,8 +248,18 @@ html, body {
 .section-with-photo {
     display: grid;
     grid-template-columns: 1fr 380px;
-    gap: 48px;
+    gap: 64px;
     align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+@media (min-width: 1280px) {
+    .section-with-photo {
+        gap: 80px;
+    }
 }
 
 .section-photo {
@@ -242,10 +268,11 @@ html, body {
 
 .section-photo img {
     width: 100%;
-    height: auto;
-    border-radius: var(--radius);
+    aspect-ratio: 3/4;
     object-fit: cover;
-    box-shadow: var(--shadow-lg);
+    object-position: 50% 30%;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
 }
 
@@ -257,8 +284,18 @@ html, body {
 .service-types-with-photo {
     display: grid;
     grid-template-columns: 1fr 380px;
-    gap: 48px;
+    gap: 64px;
     align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+@media (min-width: 1280px) {
+    .service-types-with-photo {
+        gap: 80px;
+    }
 }
 
 .service-types-photo {
@@ -267,10 +304,11 @@ html, body {
 
 .service-types-photo img {
     width: 100%;
-    height: auto;
-    border-radius: var(--radius);
+    aspect-ratio: 3/4;
     object-fit: cover;
-    box-shadow: var(--shadow-lg);
+    object-position: 50% 30%;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
 }
 
@@ -328,10 +366,11 @@ html, body {
 
 .hero-photo img { 
     width: 100%; 
-    height: auto; 
-    border-radius: var(--radius); 
+    aspect-ratio: 3/4;
     object-fit: cover;
-    box-shadow: var(--shadow-lg);
+    object-position: 50% 30%;
+    border-radius: 24px; 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
 }
 
@@ -366,7 +405,18 @@ html, body {
 .btn-primary{ background: var(--accent); color:#fff; }
 .btn-ghost{ background: transparent; color: var(--text); border:1px solid var(--border); }
 .btn-ghost:hover{ background: #F6F5F3; }
-.cta-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.cta-row{ 
+    display:flex; 
+    gap: 12px; 
+    align-items:center; 
+    flex-wrap:wrap; 
+    margin-top: 24px;
+}
+
+.cta-row .btn {
+    height: 48px;
+    min-height: 48px;
+}
 /* фоновое мягкое пятно */
 .hero::after{
     content:""; position:absolute; inset:-10% -20% auto auto; width:40vw; height:40vw; max-width:520px; max-height:520px; filter: blur(60px);
@@ -380,16 +430,22 @@ html, body {
 
 /* Sections */
 .section { 
-    padding: 36px 0; 
+    padding: 64px 0; 
     border-bottom: 1px solid var(--border);
     max-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .section {
+        padding: 96px 0;
+    }
 }
 
 /* Important list in hero */
 .important-list {
     list-style: none;
     padding: 0;
-    margin: 16px 0;
+    margin: 32px 0 0 0;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -402,8 +458,12 @@ html, body {
     background: #F3F2EF;
     border: 1px solid #E7E4DE;
     border-radius: 9999px;
-    padding: 8px 12px;
+    padding: 8px 16px;
     font-weight: 600;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
 }
 
 /* Service formats */
@@ -444,7 +504,7 @@ html, body {
 .process-list li {
     position: relative;
     padding-left: 44px;
-    margin: 18px 0;
+    margin: 16px 0;
     color: var(--text-light);
     line-height: 1.7;
     counter-increment: step-counter;
@@ -732,33 +792,29 @@ html, body {
 }
 
 .service-list {
-    list-style: none;
-    padding: 0;
+    list-style: disc;
+    padding-left: 20px;
     margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 8px 20px;
+    display: block;
 }
 
 .service-list li {
-    padding: 6px 0;
+    padding: 0;
     background: transparent;
     border-radius: 0;
     border: 0;
     font-size: 1.05rem;
     color: var(--text-light);
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    line-height: 1.75;
+    margin-bottom: 8px;
 }
 
 .service-list li::before{
-    content: "";
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--accent);
-    margin-top: 10px;
-    flex: 0 0 8px;
-    opacity: .9;
+    display: none;
+}
+
+.service-list li::marker {
+    color: var(--accent);
 }
 
 .service-list li:hover { transform: none; }
@@ -1030,9 +1086,9 @@ html, body {
 </style>
 
 <script>
-async function submitHomePayment(event){
+async function submitHomePayment(event: Event){
     event.preventDefault();
-    const input = document.getElementById('amount-input');
+    const input = document.getElementById('amount-input') as HTMLInputElement;
     if(!input) return;
     const amount = parseFloat(input.value);
     if(!amount || amount < 1){
@@ -1080,9 +1136,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (quickButtons.length > 0 && amountInput) {
         quickButtons.forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function(this: HTMLButtonElement) {
                 const amount = this.getAttribute('data-amount');
-                amountInput.value = amount;
+                if (amountInput && amount) {
+                    amountInput.value = amount;
+                }
                 
                 // Подсветка активной кнопки
                 quickButtons.forEach(btn => btn.classList.remove('active'));
