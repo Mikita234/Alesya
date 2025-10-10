@@ -365,13 +365,16 @@ html, body {
 }
 
 .hero-photo img { 
-    width: 100%; 
+    width: 100%;
+    max-width: 100%;
+    height: auto;
     aspect-ratio: 3/4;
     object-fit: cover;
     object-position: 50% 30%;
     border-radius: 24px; 
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
+    display: block;
 }
 
 .hero-photo img:hover {
@@ -916,9 +919,16 @@ html, body {
     }
     
     .hero-photo { 
-        order: 0; 
-        max-width: 240px;
+        order: -1; 
+        width: 100%;
+        max-width: 100%;
         margin: 0;
+    }
+
+    .hero-content {
+        padding-top: 0;
+        word-break: break-word;
+        overflow-wrap: anywhere;
     }
     
     .section { 
