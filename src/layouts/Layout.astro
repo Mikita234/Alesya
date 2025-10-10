@@ -446,9 +446,9 @@ p, li{ letter-spacing:0.002em; }
     position: absolute;
     top: -40px;
     left: 6px;
-    background: #4f46e5;
+    background: var(--accent);
     color: white;
-    padding: 8px 16px;
+    padding: 8px;
     text-decoration: none;
     border-radius: 4px;
     z-index: 1000;
@@ -457,8 +457,6 @@ p, li{ letter-spacing:0.002em; }
 
 .skip-link:focus {
     top: 6px;
-    outline: 3px solid white;
-    outline-offset: 2px;
 }
 
 .site-header { 
@@ -706,17 +704,16 @@ p, li{ letter-spacing:0.002em; }
 
 .footer-bottom p {
     margin: 0;
-    color: #b0b0b0;
+    color: #888;
     font-size: 0.9rem;
 }
 
 .footer-bottom a {
-    color: #a5b4fc;
+    color: var(--accent);
     text-decoration: none;
 }
 
 .footer-bottom a:hover {
-    color: #c7d2fe;
     text-decoration: underline;
 }
 

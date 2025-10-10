@@ -26,10 +26,7 @@ const description = "Психолог в Минске. Очный приём и 
             </div>
 		</div>
         <div class="hero-photo">
-            <picture>
-                <source srcset={`${import.meta.env.BASE_URL}photo1.webp`} type="image/webp" />
-                <img src={`${import.meta.env.BASE_URL}photo1.jpg`} alt="Алеся Такун: портрет, взгляд в камеру" width="350" height="450" loading="eager" decoding="async" fetchpriority="high" />
-            </picture>
+            <img src={`${import.meta.env.BASE_URL}photo1.jpg`} alt="Алеся Такун: портрет, взгляд в камеру" width="350" height="450" loading="eager" decoding="async" fetchpriority="high" />
         </div>
 	</div>
     
@@ -67,10 +64,7 @@ const description = "Психолог в Минске. Очный приём и 
             </div>
             
             <div class="section-photo">
-                <picture>
-                    <source srcset={`${import.meta.env.BASE_URL}photo2.webp`} type="image/webp" />
-                    <img src={`${import.meta.env.BASE_URL}photo2.jpg`} alt="Алеся Такун на консультации" width="350" height="450" loading="lazy" decoding="async" />
-                </picture>
+                <img src={`${import.meta.env.BASE_URL}photo2.jpg`} alt="Алеся Такун на консультации" width="350" height="450" loading="lazy" decoding="async" />
             </div>
         </div>
     </section>
@@ -136,10 +130,7 @@ const description = "Психолог в Минске. Очный приём и 
             </div>
             
             <div class="service-types-photo">
-                <picture>
-                    <source srcset={`${import.meta.env.BASE_URL}photo3.webp`} type="image/webp" />
-                    <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Алеся на встрече группы" width="350" height="450" loading="lazy" decoding="async" />
-                </picture>
+                <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Алеся на встрече группы" width="350" height="450" loading="lazy" decoding="async" />
             </div>
         </div>
 
@@ -1427,31 +1418,6 @@ document.addEventListener('DOMContentLoaded', function() {
             lastScroll = currentScroll;
         });
     }
-    
-    // Добавляем title для Instagram iframe для accessibility
-    const observer = new MutationObserver(() => {
-        const instagramIframes = document.querySelectorAll('.instagram-post iframe');
-        instagramIframes.forEach((iframe: Element, index: number) => {
-            if (!iframe.hasAttribute('title')) {
-                iframe.setAttribute('title', `Instagram пост ${index + 1}`);
-            }
-        });
-    });
-    
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-    
-    // Проверяем сразу при загрузке
-    setTimeout(() => {
-        const instagramIframes = document.querySelectorAll('.instagram-post iframe');
-        instagramIframes.forEach((iframe: Element, index: number) => {
-            if (!iframe.hasAttribute('title')) {
-                iframe.setAttribute('title', `Instagram пост ${index + 1}`);
-            }
-        });
-    }, 2000);
 });
 </script>
 
