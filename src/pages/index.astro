@@ -26,14 +26,16 @@ const description = "Психолог в Минске. Очный приём и 
             </div>
 		</div>
         <div class="hero-photo">
-            <img src={`${import.meta.env.BASE_URL}hero.jpg?v=3`} alt="Алеся Такун" width="300" height="400" loading="eager" decoding="async" fetchpriority="high" />
+            <img src={`${import.meta.env.BASE_URL}photo1.jpg`} alt="Алеся Такун" width="300" height="400" loading="eager" decoding="async" fetchpriority="high" />
         </div>
 	</div>
     
     <section id="services" class="section reveal">
-        <h2>Возможные форматы работы</h2>
-        
-        <div class="service-format reveal">
+        <div class="section-with-photo">
+            <div class="section-content">
+                <h2>Возможные форматы работы</h2>
+                
+                <div class="service-format reveal">
             <h3>Индивидуальная консультация</h3>
             <p><strong>На консультациях мы разбираем то, что часто становится тяжёлым грузом:</strong></p>
             <ul class="service-list">
@@ -47,17 +49,23 @@ const description = "Психолог в Минске. Очный приём и 
             </ul>
             <p class="service-note">* Если вашего запроса нет в списке - свяжитесь со мной, и мы обсудим, смогу ли я быть вам полезна.</p>
             <p><strong>Формат встреч:</strong> очные (г. Минск) или онлайн (Google Meet, Zoom, телеграм). Продолжительность - 50 минут.</p>
-        </div>
+                </div>
 
-        <div class="service-format reveal">
-            <h3>Психологические группы</h3>
-            <p>Это форма психологической работы, в которой несколько человек (обычно от 6 до 10 участников) под руководством ведущего (психолога) исследуют свои эмоциональные, поведенческие и межличностные трудности.</p>
-            <p><strong>Как устроены встречи:</strong></p>
-            <ul class="service-list">
-                <li>Занятия проходят очно или онлайн</li>
-                <li>На встречах работа идет через общение, упражнения и обратную связь по процессам</li>
-                <li>Длительность 3 часа (180 мин)</li>
-            </ul>
+                <div class="service-format reveal">
+                    <h3>Психологические группы</h3>
+                    <p>Это форма психологической работы, в которой несколько человек (обычно от 6 до 10 участников) под руководством ведущего (психолога) исследуют свои эмоциональные, поведенческие и межличностные трудности.</p>
+                    <p><strong>Как устроены встречи:</strong></p>
+                    <ul class="service-list">
+                        <li>Занятия проходят очно или онлайн</li>
+                        <li>На встречах работа идет через общение, упражнения и обратную связь по процессам</li>
+                        <li>Длительность 3 часа (180 мин)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section-photo">
+                <img src={`${import.meta.env.BASE_URL}photo2.jpg`} alt="Алеся Такун - психолог" width="300" height="400" loading="lazy" />
+            </div>
         </div>
     </section>
 
@@ -109,15 +117,21 @@ const description = "Психолог в Минске. Очный приём и 
             </ol>
         </div>
 
-        <div class="service-types reveal">
-            <h4>Как записаться в группу</h4>
-            <ol class="process-list">
-                <li>Выберите группу (очно или онлайн)</li>
-                <li>Напишите мне в Telegram @alesiatakun для записи</li>
-                <li>Мы с вами созваниваемся на предварительную встречу по видео (Google Meet, Zoom, телеграм) на 15-20 мин, для знакомства и сверки насколько вам подходит данный формат</li>
-                <li>Вы оплачиваете через сайт</li>
-                <li>Проведение групповой встречи онлайн или офлайн по договорённости</li>
-            </ol>
+        <div class="service-types-with-photo reveal">
+            <div class="service-types-content">
+                <h4>Как записаться в группу</h4>
+                <ol class="process-list">
+                    <li>Выберите группу (очно или онлайн)</li>
+                    <li>Напишите мне в Telegram @alesiatakun для записи</li>
+                    <li>Мы с вами созваниваемся на предварительную встречу по видео (Google Meet, Zoom, телеграм) на 15-20 мин, для знакомства и сверки насколько вам подходит данный формат</li>
+                    <li>Вы оплачиваете через сайт</li>
+                    <li>Проведение групповой встречи онлайн или офлайн по договорённости</li>
+                </ol>
+            </div>
+            
+            <div class="service-types-photo">
+                <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Групповые встречи" width="300" height="400" loading="lazy" />
+            </div>
         </div>
 
         <div class="service-types reveal">
@@ -207,6 +221,71 @@ const description = "Психолог в Минске. Очный приём и 
 html, body {
     overflow-x: hidden;
     max-width: 100%;
+}
+
+/* Секции с фотками */
+.section-with-photo {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+}
+
+.section-photo {
+    position: relative;
+}
+
+.section-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    object-fit: cover;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+}
+
+.section-photo img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+.service-types-with-photo {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+}
+
+.service-types-photo {
+    position: relative;
+}
+
+.service-types-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    object-fit: cover;
+    box-shadow: var(--shadow-lg);
+    transition: var(--transition);
+}
+
+.service-types-photo img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Мобильная версия для секций с фотками */
+@media (max-width: 768px) {
+    .section-with-photo,
+    .service-types-with-photo {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    
+    .section-photo,
+    .service-types-photo {
+        order: -1;
+    }
 }
 
 .hero-content h1 { 
