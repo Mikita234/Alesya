@@ -6,6 +6,39 @@ export const prerender = false;
 export async function POST({ request }: APIContext) {
   try {
     // прод‑логирование сведено к минимуму; подробные логи включайте локально
+
+    // Простая проверка источника запроса (Origin/Referer)
+    const origin = request.headers.get('origin') || '';
+    const referer = request.headers.get('referer') || '';
+    const allowedHosts = new Set([
+      'https://alesyatakun.by',
+      'https://www.alesyatakun.by',
+      'http://localhost:4321',
+      'http://127.0.0.1:4321'
+    ]);
+    const isAllowedOrigin = Array.from(allowedHosts).some((h) => origin.startsWith(h) || referer.startsWith(h));
+    if (!isAllowedOrigin) {
+      return new Response(JSON.stringify({ success: false, error: 'Forbidden origin' }), {
+        status: 403,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Наивный rate-limit по IP (10 запросов в минуту)
+    const ip = (request.headers.get('x-forwarded-for') || '').split(',')[0].trim() || 'unknown';
+    const now = Date.now();
+    // @ts-ignore - используем глобальную карту между инстансами в рамках одного процесса
+    globalThis.__rate = (globalThis.__rate || new Map());
+    // @ts-ignore
+    const store: Map<string, { count: number; ts: number }> = globalThis.__rate;
+    const rec = store.get(ip);
+    if (rec && now - rec.ts < 60_000 && rec.count >= 10) {
+      return new Response(JSON.stringify({ success: false, error: 'Too many requests' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    store.set(ip, rec && now - rec.ts < 60_000 ? { count: rec.count + 1, ts: rec.ts } : { count: 1, ts: now });
     
     const body = await request.json().catch((error) => {
       console.log('🔧 Сервер: Ошибка парсинга JSON:', error);
@@ -18,14 +51,14 @@ export async function POST({ request }: APIContext) {
 
     
 
-    if (typeof amount !== 'number' || amount <= 0) {
+    if (typeof amount !== 'number' || amount <= 0 || amount > 10000) {
       console.log('🔧 Сервер: Ошибка валидации amount - не число или <= 0');
       return new Response(JSON.stringify({ success: false, error: 'Bad amount' }), { 
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
     }
-    if (!orderNumber) {
+    if (!orderNumber || !/^[A-Z0-9_-]{8,64}$/i.test(orderNumber)) {
       return new Response(JSON.stringify({ success: false, error: 'Missing orderNumber' }), { 
         status: 400,
         headers: { 'Content-Type': 'application/json' }
@@ -46,14 +79,15 @@ export async function POST({ request }: APIContext) {
     // Альфа ждёт сумму в копейках BYN (minor units)
     const amountMinor = Math.round(amount * 100);
 
+    const siteOrigin = 'https://alesyatakun.by';
     const params = new URLSearchParams({
       userName: ALFA_API_LOGIN,
       password: ALFA_API_PASSWORD,
       orderNumber,
       amount: String(amountMinor),
       currency: '933',                  // BYN
-      returnUrl: returnUrl || 'https://alesyatakun.by/thanks/',
-      failUrl: failUrl || 'https://alesyatakun.by/?status=fail',
+      returnUrl: `${siteOrigin}/thanks/`,
+      failUrl: `${siteOrigin}/?status=fail`,
       description: `Order ${orderNumber}`
     });
 
