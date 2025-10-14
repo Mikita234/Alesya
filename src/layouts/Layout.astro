@@ -27,7 +27,7 @@
         <meta property="og:description" content="Гештальт-консультант. Очный приём и онлайн. Помощь при КПТСР, выгорании, сложных отношениях." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={`https://alesyatakun.by${import.meta.env.BASE_URL}`} />
-        <meta property="og:image" content={`https://alesyatakun.by${import.meta.env.BASE_URL}og-image.jpg`} />
+        <meta property="og:image" content={`https://alesyatakun.by${import.meta.env.BASE_URL}Photo/Telegram_Cover.JPG`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Алеся Такун - психолог в Минске" />
@@ -38,7 +38,7 @@
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Алеся Такун - психолог в Минске" />
         <meta name="twitter:description" content="Гештальт-консультант. Очный приём и онлайн. Помощь при КПТСР, выгорании, сложных отношениях." />
-        <meta name="twitter:image" content={`https://alesyatakun.by${import.meta.env.BASE_URL}og-image.jpg`} />
+        <meta name="twitter:image" content={`https://alesyatakun.by${import.meta.env.BASE_URL}Photo/Telegram_Cover.JPG`} />
         <meta name="twitter:image:alt" content="Алеся Такун - психолог в Минске" />
         
         <!-- Structured Data -->
@@ -259,8 +259,10 @@
         <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
         <script>
           // Google Analytics gtag.js initialization
+          /* @ts-ignore */
           window.dataLayer = window.dataLayer || [];
-          function gtag(){ window.dataLayer.push(arguments); }
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          function gtag(...args: any[]){ (window as any).dataLayer.push(args); }
           gtag('js', new Date());
           gtag('config', 'GA_MEASUREMENT_ID');
         </script>
@@ -830,11 +832,12 @@ p, li{ letter-spacing:0.002em; }
 </style>
 
 <script>
+/* @ts-nocheck */
 document.addEventListener('DOMContentLoaded', function() {
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const navList = document.querySelector('.nav-list');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const header = document.querySelector('.site-header');
+    const mobileToggle = /** @type {HTMLElement|null} */ (document.querySelector('.mobile-menu-toggle'));
+    const navList = /** @type {HTMLElement|null} */ (document.querySelector('.nav-list'));
+    const navLinks = /** @type {NodeListOf<Element>} */ (document.querySelectorAll('.nav-link'));
+    const header = /** @type {HTMLElement|null} */ (document.querySelector('.site-header'));
     
     if (mobileToggle && navList) {
         mobileToggle.addEventListener('click', function() {
@@ -844,7 +847,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Закрытие меню при клике на ссылку
         navList.addEventListener('click', function(e) {
-            if (e.target.tagName === 'A') {
+            const t = e.target;
+            if (t && t instanceof HTMLAnchorElement) {
                 mobileToggle.classList.remove('active');
                 navList.classList.remove('active');
             }
@@ -852,11 +856,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Плавный скролл и подсветка активного пункта
-    function setActiveLink(hash) {
+    /** @type {(hash: string) => void} */
+    const setActiveLink = (hash: string) => {
         navLinks.forEach((l) => l.classList.remove('active'));
         const active = Array.from(navLinks).find((l) => l.getAttribute('data-target') === hash);
         if (active) active.classList.add('active');
-    }
+    };
 
     navLinks.forEach((link) => {
         const hash = link.getAttribute('data-target');
@@ -866,20 +871,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = document.querySelector(hash);
             if (target) {
                 e.preventDefault();
-                const headerOffset = header ? header.offsetHeight + 8 : 0;
+                const headerOffset = header ? (header as HTMLElement).offsetHeight + 8 : 0;
                 const elementPosition = target.getBoundingClientRect().top + window.scrollY;
                 const offsetPosition = elementPosition - headerOffset;
                 window.history.replaceState(null, '', `${import.meta.env.BASE_URL}${hash}`);
                 window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-                setActiveLink(hash);
+                setActiveLink(hash as string);
             }
         });
     });
 
     // Подсветка по скроллу
-    const sections = ['#about', '#services', '#payments'].map((s) => document.querySelector(s)).filter(Boolean);
+    const sections = ['#about', '#services', '#payments']
+        .map((s) => document.querySelector(s))
+        .filter((el) => el instanceof HTMLElement) as HTMLElement[];
     window.addEventListener('scroll', () => {
-        const scrollPos = window.scrollY + (header ? header.offsetHeight + 16 : 0);
+        const scrollPos = window.scrollY + (header ? (header as HTMLElement).offsetHeight + 16 : 0);
         for (const sec of sections) {
             const top = sec.offsetTop;
             const bottom = top + sec.offsetHeight;

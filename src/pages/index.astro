@@ -8,7 +8,6 @@ const description = "Психолог в Минске. Очный приём и 
 <Layout title={title} description={description}>
     <div class="hero reveal">
         <div class="hero-content">
-            <div class="eyebrow">Психолог в Минске</div>
             <h1>Алеся Такун</h1>
             <p class="subtitle">Психолог, гештальт‑консультант, специалист по травме привязанности и нарциссической травме. Работаю со взрослыми индивидуально и веду психологические группы. Важно: я нахожусь в личной терапии и регулярной супервизии (наблюдение более опытного психолога за работой коллеги), постоянно обучаюсь и повышаю квалификацию.</p>
             <p class="lede">Я работаю глубоко и честно. Для меня принципиально не обходить боль стороной, а смотреть на неё прямо и бережно, чтобы можно было прожить и отпустить то, что мешает жить. Я умею быть рядом, когда тяжело. Со мной можно рассчитывать на ясность и прямоту - я не буду сглаживать острые углы красивыми словами, но всегда на стороне клиента и уважаю его темп.</p>
@@ -51,6 +50,13 @@ const description = "Психолог в Минске. Очный приём и 
             <p><strong>Формат встреч:</strong> очные (г. Минск) или онлайн (Google Meet, Zoom, телеграм). Продолжительность - 50 минут.</p>
                 </div>
 
+                
+            </div>
+            
+            <div class="section-photo">
+                <img src={`${import.meta.env.BASE_URL}photo2.jpg`} alt="Алеся Такун на консультации" width="350" height="450" loading="lazy" decoding="async" />
+            </div>
+            <div class="section-content">
                 <div class="service-format reveal">
                     <h3>Психологические группы</h3>
                     <p>Это форма психологической работы, в которой несколько человек (обычно от 6 до 10 участников) под руководством ведущего (психолога) исследуют свои эмоциональные, поведенческие и межличностные трудности.</p>
@@ -62,9 +68,8 @@ const description = "Психолог в Минске. Очный приём и 
                     </ul>
                 </div>
             </div>
-            
             <div class="section-photo">
-                <img src={`${import.meta.env.BASE_URL}photo2.jpg`} alt="Алеся Такун на консультации" width="350" height="450" loading="lazy" decoding="async" />
+                <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Алеся на встрече группы" width="350" height="450" loading="lazy" decoding="async" />
             </div>
         </div>
     </section>
@@ -127,10 +132,6 @@ const description = "Психолог в Минске. Очный приём и 
                     <li>Вы оплачиваете через сайт</li>
                     <li>Проведение групповой встречи онлайн или офлайн по договорённости</li>
                 </ol>
-            </div>
-            
-            <div class="service-types-photo">
-                <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Алеся на встрече группы" width="350" height="450" loading="lazy" decoding="async" />
             </div>
         </div>
 
@@ -259,6 +260,9 @@ html, body {
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
+/* Десктоп: сместить боковую фото к блоку "Психологические группы" */
+/* смещение возле групп убрано, т.к. размещаем отдельную фото у нужного блока */
+
 /* Мобильная версия для секций с фотками */
 @media (max-width: 768px) {
     .section-with-photo,
@@ -275,8 +279,9 @@ html, body {
     
     .section-photo img,
     .service-types-photo img {
-        max-width: 280px;
-        margin: 0 auto;
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
         display: block;
     }
 }
@@ -326,6 +331,12 @@ html, body {
 .hero-photo img:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+@media (min-width: 769px) {
+    /* Десктоп: выровнять первую фото по началу подзаголовка */
+    .hero-photo {
+        margin-top: 56px;
+    }
 }
 
 /* Buttons */
@@ -1258,6 +1269,20 @@ html {
 </style>
 
 <script>
+// Неразрывные пробелы после коротких предлогов и союзов (1–2 символа)
+document.addEventListener('DOMContentLoaded', function(){
+    const selectors = [
+        '.hero-content p',
+        '.service-format p',
+        '.section p',
+        '.payment-main p'
+    ];
+    const rx = /(^|\s)([А-Яа-яA-Za-z]{1,2})\s+(?=\S)/g;
+    document.querySelectorAll(selectors.join(', ')).forEach((el) => {
+        el.innerHTML = el.innerHTML.replace(rx, (m, p1, p2) => `${p1}${p2}&nbsp;`);
+    });
+});
+
 // Валидация в реальном времени
 function validateAmount(value: string) {
     const wrapper = document.getElementById('amount-input-wrapper');
