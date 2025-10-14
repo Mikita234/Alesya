@@ -3,21 +3,30 @@ export function initIndexPage() {
   document.addEventListener('DOMContentLoaded', function () {
     const target = document.querySelector('.instagram-section');
     if (!target) return;
-    const onVisible = () => {
+    const loadOnce = () => {
+      // если уже загружен
+      if ((window as any).instgrm || document.querySelector('script[src*="instagram.com/embed.js"]')) return;
       const s = document.createElement('script');
       s.async = true;
       s.src = 'https://www.instagram.com/embed.js';
       document.body.appendChild(s);
     };
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          onVisible();
-          io.disconnect();
-        }
-      });
-    }, { rootMargin: '200px' });
-    io.observe(target);
+    // IntersectionObserver
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            loadOnce();
+            io.disconnect();
+          }
+        });
+      }, { rootMargin: '200px' });
+      io.observe(target);
+    } else {
+      loadOnce();
+    }
+    // Фолбек: если пользователь не долистал, всё равно подгрузим через 3 сек
+    setTimeout(loadOnce, 3000);
   });
 
   // Точное выравнивание геро-фото
