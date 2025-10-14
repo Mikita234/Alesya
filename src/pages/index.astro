@@ -188,7 +188,10 @@ const description = "Очный приём и онлайн‑консульта�
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DNNpZr-IXi3/" data-instgrm-version="14"></blockquote>
             </div>
         </div>
-        <script type="module" src="/src/scripts/index-page.ts"></script>
+        <script type="module">
+            import { initIndexPage } from '../scripts/index-page.ts';
+            initIndexPage();
+        </script>
     </section>
 
     <!-- Floating кнопка на мобилке -->
@@ -1298,6 +1301,9 @@ document.addEventListener('DOMContentLoaded', function(){
     document.querySelectorAll(selectors.join(', ')).forEach((el) => {
         // NBSP после коротких предлогов/союзов и склейка "то, что"
         let html = el.innerHTML.replace(rx, (m, p1, p2) => `${p1}${p2}&nbsp;`);
+        // частные случаи
+        html = html.replace(/\sв\s+(?=проблемы)/gi, '&nbsp;в ');
+        html = html.replace(/часть\s+терапии/gi, 'часть&nbsp;терапии');
         html = html.replace(/то,\s+что/gi, 'то,&nbsp;что');
         el.innerHTML = html;
     });
@@ -1460,6 +1466,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     revealElements.forEach(el => revealObserver.observe(el));
+    // Триггерим перерасчет после первичного появления, чтобы выровнять геро-фото
+    setTimeout(() => window.dispatchEvent(new Event('resize')), 300);
     
     // Скрытие floating кнопки при скролле вниз
     let lastScroll = 0;
