@@ -1299,7 +1299,10 @@ document.addEventListener('DOMContentLoaded', function(){
     ];
     const rx = /(^|\s)([А-Яа-яA-Za-z]{1,2})\s+(?=\S)/g;
     document.querySelectorAll(selectors.join(', ')).forEach((el) => {
-        el.innerHTML = el.innerHTML.replace(rx, (m, p1, p2) => `${p1}${p2}&nbsp;`);
+        // NBSP после коротких предлогов/союзов и склейка "то, что"
+        let html = el.innerHTML.replace(rx, (m, p1, p2) => `${p1}${p2}&nbsp;`);
+        html = html.replace(/то,\s+что/gi, 'то,&nbsp;что');
+        el.innerHTML = html;
     });
 });
 
