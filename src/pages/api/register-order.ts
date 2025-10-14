@@ -5,21 +5,18 @@ export const prerender = false;
 
 export async function POST({ request }: APIContext) {
   try {
-    console.log('🔧 Сервер: Получен POST запрос');
-    console.log('🔧 Сервер: Content-Type:', request.headers.get('content-type'));
+    // прод‑логирование сведено к минимуму; подробные логи включайте локально
     
     const body = await request.json().catch((error) => {
       console.log('🔧 Сервер: Ошибка парсинга JSON:', error);
       return {};
     });
     
-    console.log('🔧 Сервер: Получен запрос:', body);
-    console.log('🔧 Сервер: Тип body:', typeof body);
+    // Валидация входных данных
     
-    const { amount, orderNumber, returnUrl, failUrl } = body;
+    const { amount, orderNumber } = body;
 
-    console.log('🔧 Сервер: amount =', amount, 'тип:', typeof amount);
-    console.log('🔧 Сервер: orderNumber =', orderNumber, 'тип:', typeof orderNumber);
+    
 
     if (typeof amount !== 'number' || amount <= 0) {
       console.log('🔧 Сервер: Ошибка валидации amount - не число или <= 0');
@@ -60,19 +57,17 @@ export async function POST({ request }: APIContext) {
       description: `Order ${orderNumber}`
     });
 
-    console.log('🔧 Сервер: Отправляем запрос к Альфа-Банку с параметрами:', params.toString());
-
-    // Попробуем GET запрос с параметрами в URL
-    const url = `https://ecom.alfabank.by/payment/rest/register.do?${params.toString()}`;
-    console.log('🔧 Сервер: URL для запроса:', url);
-    
-    const bankRes = await fetch(url, {
-      method: 'GET',
-      headers: { 'Accept': 'application/json' },
+    // Используем POST, не передаем креды в URL
+    const bankRes = await fetch('https://ecom.alfabank.by/payment/rest/register.do', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: params.toString()
     });
 
-    console.log('🔧 Сервер: Статус ответа от Альфа-Банка:', bankRes.status);
-    console.log('🔧 Сервер: Заголовки ответа:', Object.fromEntries(bankRes.headers.entries()));
+    // Минимальная диагностика без утечки параметров
 
     // Читаем ответ как текст сначала, чтобы избежать ошибки "Body is unusable"
     const responseText = await bankRes.text();
