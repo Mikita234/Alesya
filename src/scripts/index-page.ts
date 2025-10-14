@@ -45,6 +45,10 @@ export function initIndexPage() {
       photo.style.marginTop = `${Math.round(delta)}px`;
     };
     adjust();
+    window.addEventListener('load', adjust);
     window.addEventListener('resize', adjust);
+    // Пересчёт при возможной подгрузке шрифтов/медиа
+    setTimeout(adjust, 300);
+    setTimeout(adjust, 800);
   });
 }
