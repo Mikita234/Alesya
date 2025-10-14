@@ -53,7 +53,7 @@ const description = "Психолог в Минске. Очный приём и 
                 
             </div>
             
-            <div class="section-photo">
+            <div class="section-photo section-photo--formats">
                 <img src={`${import.meta.env.BASE_URL}photo2.jpg`} alt="Алеся Такун на консультации" width="350" height="450" loading="lazy" decoding="async" />
             </div>
             <div class="section-content">
@@ -68,7 +68,7 @@ const description = "Психолог в Минске. Очный приём и 
                     </ul>
                 </div>
             </div>
-            <div class="section-photo">
+            <div class="section-photo section-photo--groups">
                 <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Алеся на встрече группы" width="350" height="450" loading="lazy" decoding="async" />
             </div>
         </div>
@@ -233,6 +233,17 @@ html, body {
 .section-photo img:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+}
+
+/* Точная подстройка вертикали для фото рядом с заголовками на десктопе */
+@media (min-width: 1024px) {
+    .section-photo--formats { margin-top: 28px; }
+    .section-photo--groups { margin-top: 10px; }
+}
+
+@media (max-width: 768px) {
+    .section-photo--formats,
+    .section-photo--groups { margin-top: 0; }
 }
 
 .service-types-with-photo {
@@ -1283,9 +1294,15 @@ document.addEventListener('DOMContentLoaded', function(){
     const photo = document.querySelector('.hero-photo');
     if (!(subtitle instanceof HTMLElement) || !(photo instanceof HTMLElement)) return;
     const adjust = () => {
+        // На мобильных и планшетах не смещаем вручную
+        if (window.innerWidth < 769) {
+            photo.style.marginTop = '0px';
+            return;
+        }
         const subtitleTop = subtitle.getBoundingClientRect().top + window.scrollY;
         const heroTop = photo.parentElement ? photo.parentElement.getBoundingClientRect().top + window.scrollY : 0;
-        const delta = Math.max(0, subtitleTop - heroTop);
+        // небольшая визуальная дельта для точного совпадения линий базиса
+        const delta = Math.max(0, subtitleTop - heroTop + 2);
         photo.style.marginTop = `${Math.round(delta)}px`;
     };
     adjust();
