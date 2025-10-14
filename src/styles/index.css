@@ -1,0 +1,4 @@
+/* Общие стили (без изменения существующих правил) */
+.section { border-bottom: 1px solid var(--border); }
+.hero-photo img, .section-photo img { border-radius: var(--radius); transition: var(--transition); }
+.btn { display: inline-flex; align-items: center; justify-content: center; }

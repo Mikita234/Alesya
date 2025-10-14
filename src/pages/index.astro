@@ -188,27 +188,9 @@ const description = "Очный приём и онлайн‑консульта�
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DNNpZr-IXi3/" data-instgrm-version="14"></blockquote>
             </div>
         </div>
-        <script>
-        // Отложенная инициализация Instagram embed
-        document.addEventListener('DOMContentLoaded', function(){
-            const target = document.querySelector('.instagram-section');
-            if (!target) return;
-            const onVisible = () => {
-                const s = document.createElement('script');
-                s.async = true;
-                s.src = 'https://www.instagram.com/embed.js';
-                document.body.appendChild(s);
-            };
-            const io = new IntersectionObserver((entries) => {
-                entries.forEach((e) => {
-                    if (e.isIntersecting) {
-                        onVisible();
-                        io.disconnect();
-                    }
-                })
-            }, { rootMargin: '200px' });
-            io.observe(target);
-        });
+        <script type="module">
+            import { initIndexPage } from "../scripts/index-page.ts";
+            initIndexPage();
         </script>
     </section>
 
