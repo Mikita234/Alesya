@@ -6,7 +6,7 @@ const description = "Очный приём и онлайн‑консульта�
 ---
 
 <Layout title={title} description={description}>
-    <div class="hero split reveal">
+    <div class="hero reveal">
         <div class="hero-content content">
             <h1>Алеся Такун</h1>
             <p class="subtitle">Психолог, гештальт‑консультант, специалист по травме привязанности и нарциссической травме. Работаю со взрослыми индивидуально и веду психологические группы. Важно: я нахожусь в личной терапии и регулярной супервизии (наблюдение более опытного психолога за работой коллеги), постоянно обучаюсь и повышаю квалификацию.</p>
@@ -188,9 +188,63 @@ const description = "Очный приём и онлайн‑консульта�
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DNNpZr-IXi3/" data-instgrm-version="14"></blockquote>
             </div>
         </div>
-        <script type="module">
-            import { initIndexPage } from '../scripts/index-page.ts';
-            initIndexPage();
+        <script>
+            // Instagram embed - простая загрузка
+            document.addEventListener('DOMContentLoaded', function () {
+                // Загружаем скрипт сразу, без ленивой загрузки
+                if (!window.instgrm && !document.querySelector('script[src*="instagram.com/embed.js"]')) {
+                    const s = document.createElement('script');
+                    s.async = true;
+                    s.src = 'https://www.instagram.com/embed.js';
+                    document.body.appendChild(s);
+                }
+            });
+
+            // Точное выравнивание геро-фото
+            document.addEventListener('DOMContentLoaded', function(){
+                const subtitle = document.querySelector('.hero .subtitle');
+                const photo = document.querySelector('.hero-photo');
+                if (!subtitle || !photo) return;
+                const adjust = () => {
+                    if (window.innerWidth < 769) {
+                        photo.style.marginTop = '0px';
+                        return;
+                    }
+                    const subtitleTop = subtitle.getBoundingClientRect().top + window.scrollY;
+                    const heroTop = (photo.parentElement ? photo.parentElement.getBoundingClientRect().top + window.scrollY : 0);
+                    const delta = Math.max(0, subtitleTop - heroTop + 2);
+                    photo.style.marginTop = `${Math.round(delta)}px`;
+                };
+                adjust();
+                window.addEventListener('load', adjust);
+                window.addEventListener('resize', adjust);
+                // Пересчёт при возможной подгрузке шрифтов/медиа
+                setTimeout(adjust, 300);
+                setTimeout(adjust, 800);
+            });
+
+            // Неразрывные пробелы после коротких предлогов и союзов (1–2 символа)
+            document.addEventListener('DOMContentLoaded', function(){
+                const selectors = [
+                    '.hero-content p',
+                    '.service-format p',
+                    '.section p',
+                    '.payment-main p',
+                    '.important-list li',
+                    '.process-list li',
+                    '.service-list li',
+                    '.payment-security p',
+                    '.payment-notice p'
+                ];
+                const rx = /(^|\s)([А-Яа-яA-Za-z]{1,2})\s+(?=\S)/g;
+                const rxSpecific = /(то, что|часть терапии|в проблемы сразу|3-D Secure)/gi; // Specific phrases
+                document.querySelectorAll(selectors.join(', ')).forEach((el) => {
+                    let html = el.innerHTML;
+                    html = html.replace(rx, (m, p1, p2) => `${p1}${p2}&nbsp;`);
+                    html = html.replace(rxSpecific, (m) => m.replace(/\s/g, '&nbsp;')); // Replace all spaces in specific phrases
+                    el.innerHTML = html;
+                });
+            });
         </script>
     </section>
 
@@ -210,7 +264,7 @@ const description = "Очный приём и онлайн‑консульта�
 /* Hero Section */
 .hero { 
     display: grid; 
-    grid-template-columns: 1fr 520px; 
+    grid-template-columns: 1fr 400px; 
     gap: 48px; 
     align-items: start; 
     margin: 40px 0 80px; 
@@ -221,8 +275,8 @@ const description = "Очный приём и онлайн‑консульта�
 /* Унифицированная двухколоночная сетка для секций текст | фото */
 .split { 
     display: grid;
-    grid-template-columns: 1fr 520px; 
-    gap: 40px; 
+    grid-template-columns: 1fr 400px; 
+    gap: 48px; 
     align-items: start; 
 }
 
@@ -306,29 +360,7 @@ html, body {
 /* Десктоп: сместить боковую фото к блоку "Психологические группы" */
 /* смещение возле групп убрано, т.к. размещаем отдельную фото у нужного блока */
 
-/* Мобильная версия для секций с фотками */
-@media (max-width: 900px) {
-    .section-with-photo,
-    .service-types-with-photo {
-        grid-template-columns: 1fr;
-        gap: 24px; /* ровные интервалы */
-        justify-items: start;
-    }
-    
-    .section-photo,
-    .service-types-photo {
-        order: 1; /* текст → фото */
-        max-width: 100%;
-    }
-    
-    .section-photo img,
-    .service-types-photo img {
-        max-width: 100%;
-        width: 100%;
-        margin: 0;
-        display: block;
-    }
-}
+/* Мобильная версия для секций с фотками - перенесено в @media (max-width: 768px) */
 
 /* Шаги: нумерованный список с кружками 28x28 */
 .steps { counter-reset: step; list-style: none; padding-left: 0; margin: 0; }
@@ -339,9 +371,7 @@ html, body {
 .service-types .service-list, .service-types-with-photo .service-list { padding-left: 1.25rem; }
 .service-types .service-list li, .service-types-with-photo .service-list li { line-height: 1.6; margin-top: 10px; }
 
-@media (max-width: 900px) {
-  .steps li { margin-top: 14px; }
-}
+/* Медиа-запрос для steps перенесен в @media (max-width: 768px) */
 
 .hero-content h1 { 
     margin: 0 0 12px 0; 
@@ -1033,6 +1063,31 @@ html {
     .hero-content {
         padding-top: 0;
     }
+    
+    .section-with-photo,
+    .service-types-with-photo {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        justify-items: start;
+    }
+    
+    .photo,
+    .section-photo,
+    .service-types-photo {
+        order: 1; /* текст → фото */
+        max-width: 100%;
+    }
+    
+    .photo img,
+    .section-photo img,
+    .service-types-photo img {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        display: block;
+    }
+    
+    .steps li { margin-top: 14px; }
     
     .section { 
         padding: 24px 0; 
