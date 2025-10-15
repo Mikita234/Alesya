@@ -271,7 +271,6 @@ import '../styles/index.css';
         </script>
     </head>
     <body class="theme-serene">
-        <a href="#main-content" class="skip-link">Перейти к основному содержимому</a>
         <header class="site-header">
             <nav class="nav">
                 <a class="logo" href={`${import.meta.env.BASE_URL}`}>Алеся Такун</a>
@@ -446,23 +445,7 @@ p, li{ letter-spacing:0.002em; }
 .btn-ghost{ background:transparent; color:var(--text); border:1px solid var(--border); }
 .btn-ghost:hover{ background:#F6F5F3; }
 
-/* Skip Link for Accessibility */
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 6px;
-    background: var(--accent);
-    color: white;
-    padding: 8px;
-    text-decoration: none;
-    border-radius: 4px;
-    z-index: 1000;
-    font-weight: 600;
-}
-
-.skip-link:focus {
-    top: 6px;
-}
+/* skip-link удалён */
 
 .site-header { 
     border-bottom: 1px solid var(--border); 

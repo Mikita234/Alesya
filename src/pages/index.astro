@@ -126,7 +126,7 @@ const description = "Очный приём и онлайн‑консульта�
         
         <div class="service-types reveal">
             <h4>Как получить консультацию</h4>
-            <ol class="process-list">
+            <ol class="process-list steps">
                 <li>Вы оплачиваете через сайт</li>
                 <li>Получаете подтверждение на e-mail</li>
                 <li>Связываетесь со мной в телеграм @alesiatakun для выбора времени (или дождитесь предложения времени)</li>
@@ -137,7 +137,7 @@ const description = "Очный приём и онлайн‑консульта�
         <div class="service-types-with-photo reveal">
             <div class="service-types-content">
                 <h4>Как записаться в группу</h4>
-                <ol class="process-list">
+                <ol class="process-list steps">
                     <li>Выберите группу (очно или онлайн)</li>
                     <li>Напишите мне в Telegram @alesiatakun для записи</li>
                     <li>Мы с вами созваниваемся на предварительную встречу по видео (Google Meet, Zoom, телеграм) на 15-20 мин, для знакомства и сверки насколько вам подходит данный формат</li>
@@ -328,6 +328,19 @@ html, body {
         margin: 0;
         display: block;
     }
+}
+
+/* Шаги: нумерованный список с кружками 28x28 */
+.steps { counter-reset: step; list-style: none; padding-left: 0; margin: 0; }
+.steps li { display: grid; grid-template-columns: 28px 1fr; align-items: start; column-gap: 12px; margin-top: 14px; line-height: 1.6; }
+.steps li::before { counter-increment: step; content: counter(step); display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9999px; background: #6D78FF; color: #fff; font-size: 14px; line-height: 1; font-weight: 700; }
+
+/* Буллет‑списки в этих секциях: унификация отступов */
+.service-types .service-list, .service-types-with-photo .service-list { padding-left: 1.25rem; }
+.service-types .service-list li, .service-types-with-photo .service-list li { line-height: 1.6; margin-top: 10px; }
+
+@media (max-width: 900px) {
+  .steps li { margin-top: 14px; }
 }
 
 .hero-content h1 { 
