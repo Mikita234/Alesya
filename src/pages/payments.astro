@@ -484,5 +484,72 @@ const description = "Оплата услуг психолога Алеси Та�
 }
 </style>
 
-<script type="module" src="/src/scripts/payments.ts"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const paymentForm = document.getElementById('payment-form');
+  const amountInput = document.getElementById('amount-input');
+  const help = document.getElementById('amount-help');
+  const quickButtons = Array.from(document.querySelectorAll('.btn-quick'));
+
+  async function handlePaymentSubmit(event) {
+    event.preventDefault();
+    const amountStr = amountInput && amountInput.value;
+    const amount = amountStr ? parseFloat(amountStr) : NaN;
+
+    if (!amount || isNaN(amount) || amount < 1) {
+      if (help) help.textContent = 'Введите сумму от 1 до 10000 BYN';
+      if (amountInput) amountInput.focus();
+      return;
+    }
+    if (amount > 10000) {
+      if (help) help.textContent = 'Максимальная сумма: 10000 BYN';
+      if (amountInput) amountInput.focus();
+      return;
+    }
+
+    const orderId = 'ORDER_' + Date.now();
+    try {
+      const res = await fetch('/api/register-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, orderNumber: orderId })
+      });
+      let data;
+      try {
+        data = await res.json();
+      } catch (e) {
+        throw new Error('Bad JSON from server, status ' + res.status);
+      }
+      if (!res.ok || !data || !data.success) {
+        throw new Error((data && data.error) ? data.error : ('HTTP ' + res.status));
+      }
+      window.location.href = data.formUrl;
+    } catch (error) {
+      if (help) help.textContent = 'Ошибка оплаты: ' + (error && error.message ? error.message : 'Неизвестная ошибка');
+      // также можно показать toast/alert при необходимости
+    }
+  }
+
+  if (paymentForm) {
+    paymentForm.addEventListener('submit', handlePaymentSubmit);
+  }
+
+  quickButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      const a = this.getAttribute('data-amount');
+      if (amountInput && a) {
+        amountInput.value = a;
+      }
+      quickButtons.forEach(function (b) { b.classList.remove('active'); });
+      this.classList.add('active');
+    });
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const amountFromUrl = params.get('amount');
+  if (amountFromUrl && amountInput) {
+    amountInput.value = amountFromUrl;
+  }
+});
+</script>
 
