@@ -362,10 +362,50 @@ html, body {
 
 /* Мобильная версия для секций с фотками - перенесено в @media (max-width: 768px) */
 
-/* Шаги: нумерованный список с кружками 28x28 */
-.steps { counter-reset: step; list-style: none; padding-left: 0; margin: 0; }
-.steps li { display: grid; grid-template-columns: 28px 1fr; align-items: start; column-gap: 12px; margin-top: 14px; line-height: 1.6; }
-.steps li::before { counter-increment: step; content: counter(step); display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9999px; background: #6D78FF; color: #fff; font-size: 14px; line-height: 1; font-weight: 700; }
+/* Шаги: нумерованный список с кружками 28x28 и вертикальной линией */
+.steps { 
+    counter-reset: step; 
+    list-style: none; 
+    padding-left: 0; 
+    margin: 0; 
+}
+.steps li { 
+    display: grid; 
+    grid-template-columns: 28px 12px 1fr; /* кружок | зазор/линия | текст */
+    align-items: start; 
+    margin-top: 14px; 
+    line-height: 1.6; 
+    position: relative;
+}
+.steps li::before { 
+    counter-increment: step; 
+    content: counter(step); 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    width: 28px; 
+    height: 28px; 
+    border-radius: 9999px; 
+    background: #6D78FF; 
+    color: #fff; 
+    font-size: 14px; 
+    line-height: 1; 
+    font-weight: 700; 
+    grid-column: 1;
+}
+.steps li::after {
+    content: '';
+    position: absolute;
+    left: 13px; /* центр кружка (28px/2) */
+    top: 28px; /* после кружка */
+    bottom: -14px; /* до следующего пункта */
+    width: 2px;
+    background: #e5e7eb;
+    grid-column: 2;
+}
+.steps li:last-child::after {
+    display: none; /* убираем линию у последнего пункта */
+}
 
 /* Буллет‑списки в этих секциях: унификация отступов */
 .service-types .service-list, .service-types-with-photo .service-list { padding-left: 1.25rem; }
@@ -864,7 +904,8 @@ html {
     max-width: 100%;
 }
 
-.service-types h4 {
+.service-types h4,
+.service-types-with-photo h4 {
     font-size: 1.25rem;
     font-weight: 600;
     margin: 40px 0 20px 0;
@@ -1069,6 +1110,7 @@ html {
         grid-template-columns: 1fr;
         gap: 24px;
         justify-items: start;
+        padding: 0; /* убираем лишний padding для выравнивания */
     }
     
     .photo,
@@ -1170,8 +1212,9 @@ html {
         padding: 14px 24px;
     }
     
-    .service-types {
-        padding: 16px;
+    .service-types,
+    .service-types-with-photo {
+        padding: 0; /* убираем лишний padding для выравнивания */
         margin: 12px 0;
     }
     
