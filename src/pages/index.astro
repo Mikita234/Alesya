@@ -1144,7 +1144,7 @@ html {
     .photo,
     .section-photo,
     .service-types-photo {
-        order: 1; /* текст → фото */
+        order: 0; /* по умолчанию */
         max-width: 100%;
     }
     
@@ -1162,6 +1162,14 @@ html {
     .section { 
         padding: 24px 0; 
     }
+
+    /* ЯВНЫЙ порядок: фото сверху на мобиле во всех трёх секциях */
+    .hero .hero-photo { order: -1; }
+    .section-with-photo .section-photo { order: -1; }
+    .service-types-with-photo .section-photo, .service-types-with-photo .photo { order: -1; }
+
+    /* Выравнивание по левому краю контейнеров */
+    .hero, .section-with-photo, .service-types-with-photo { justify-items: start; }
     
     .section h2 { 
         font-size: 1.8rem; 
