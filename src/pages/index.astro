@@ -203,27 +203,12 @@ const description = "Очный приём и онлайн‑консульта�
                 }
             });
 
-            // Точное выравнивание геро-фото
+            // Статичное выравнивание геро-фото - убираем JavaScript выравнивание
             document.addEventListener('DOMContentLoaded', function(){
-                const subtitle = document.querySelector('.hero .subtitle');
                 const photo = document.querySelector('.hero-photo');
-                if (!subtitle || !photo) return;
-                const adjust = () => {
-                    if (window.innerWidth < 769) {
-                        photo.style.marginTop = '0px';
-                        return;
-                    }
-                    const subtitleTop = subtitle.getBoundingClientRect().top + window.scrollY;
-                    const heroTop = (photo.parentElement ? photo.parentElement.getBoundingClientRect().top + window.scrollY : 0);
-                    const delta = Math.max(0, subtitleTop - heroTop + 2);
-                    photo.style.marginTop = `${Math.round(delta)}px`;
-                };
-                adjust();
-                window.addEventListener('load', adjust);
-                window.addEventListener('resize', adjust);
-                // Пересчёт при возможной подгрузке шрифтов/медиа
-                setTimeout(adjust, 300);
-                setTimeout(adjust, 800);
+                if (!photo) return;
+                // Сбрасываем все динамические отступы
+                photo.style.marginTop = '0px';
             });
 
             // Неразрывные пробелы после коротких предлогов и союзов (1–2 символа)
@@ -273,6 +258,11 @@ const description = "Очный приём и онлайн‑консульта�
     margin: 40px 0 80px; 
     padding: 40px 0;
     position: relative;
+}
+
+/* Выравнивание hero-фото по выделенной полосе текста */
+.hero-photo {
+    margin-top: 0; /* сбрасываем JavaScript выравнивание */
 }
 
 /* Унифицированная двухколоночная сетка для секций текст | фото */
