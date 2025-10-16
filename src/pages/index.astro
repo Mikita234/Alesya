@@ -67,14 +67,7 @@ const description = "Очный приём и онлайн‑консульта�
         </div>
 
         <div class="section-with-photo split">
-            <div class="section-photo section-photo--groups photo">
-                <picture>
-                    <source srcset={`${import.meta.env.BASE_URL}photo3.jpg?format=avif`} type="image/avif" />
-                    <source srcset={`${import.meta.env.BASE_URL}photo3.jpg?format=webp`} type="image/webp" />
-                    <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Алеся на встрече группы" width="350" height="450" loading="lazy" decoding="async" />
-                </picture>
-            </div>
-            <div class="section-content">
+            <div class="section-content content">
                 <div class="service-format reveal">
                     <h3>Психологические группы</h3>
                     <p>Это форма психологической работы, в которой несколько человек (обычно от 6 до 10 участников) под руководством ведущего (психолога) исследуют свои эмоциональные, поведенческие и межличностные трудности.</p>
@@ -85,6 +78,13 @@ const description = "Очный приём и онлайн‑консульта�
                         <li>Длительность 3 часа (180 мин)</li>
                     </ul>
                 </div>
+            </div>
+            <div class="section-photo section-photo--groups photo">
+                <picture>
+                    <source srcset={`${import.meta.env.BASE_URL}photo3.jpg?format=avif`} type="image/avif" />
+                    <source srcset={`${import.meta.env.BASE_URL}photo3.jpg?format=webp`} type="image/webp" />
+                    <img src={`${import.meta.env.BASE_URL}photo3.jpg`} alt="Алеся на встрече группы" width="350" height="450" loading="lazy" decoding="async" />
+                </picture>
             </div>
         </div>
     </section>
