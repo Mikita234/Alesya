@@ -318,6 +318,13 @@ html, body {
     transition: var(--transition);
 }
 
+/* Выравнивание визуального размера фото 2 и 3 */
+.section-photo--formats img,
+.section-photo--groups img {
+    aspect-ratio: 3 / 4; /* одинаковая пропорция */
+    object-fit: cover;   /* обрезаем излишки по краям */
+}
+
 .section-photo img:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
