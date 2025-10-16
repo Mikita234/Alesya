@@ -656,6 +656,34 @@ html {
 
 .section:last-child { border-bottom: none; }
 
+/* OVERRIDE: семантические шаги в двух секциях (.process-list.steps)
+   — Desktop/Tablet/Mobile едино: 2 колонки 28px | 1fr, без внутреннего padding слева.
+   — Линия рисуется абсолютом внутри гаттера, не влияет на ширину текста. */
+.process-list.steps { list-style: none; padding-left: 0; margin: 0; counter-reset: step; }
+.process-list.steps li { 
+    display: grid; 
+    grid-template-columns: 28px 1fr; 
+    align-items: start; 
+    margin: 14px 0; 
+    line-height: 1.6; 
+    position: relative; 
+    padding-left: 0; /* переопределяем базовый .process-list */
+}
+.process-list.steps li::before { 
+    counter-increment: step; 
+    content: counter(step); 
+    position: static; /* вместо absolute из базовых стилей */
+    display: inline-flex; align-items: center; justify-content: center; 
+    width: 28px; height: 28px; border-radius: 9999px; background: #6D78FF; color: #fff; 
+    font-size: 14px; line-height: 1; font-weight: 700; 
+}
+.process-list.steps li::after { 
+    content: ""; position: absolute; left: 13px; top: 28px; bottom: -14px; width: 2px; background: #e5e7eb;
+}
+.process-list.steps li:last-child::after { display: none; }
+
+.section:last-child { border-bottom: none; }
+
 .section h2 { 
     font-size: clamp(1.6rem, 3.2vw, 2.2rem); 
     font-weight: 800; 
