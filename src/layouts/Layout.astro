@@ -855,14 +855,19 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             // внутри одной страницы - скроллим плавно
             const target = document.querySelector(hash);
-            if (target) {
+            if (target && target instanceof HTMLElement) {
                 e.preventDefault();
                 const headerOffset = header ? (header as HTMLElement).offsetHeight + 8 : 0;
                 const elementPosition = target.getBoundingClientRect().top + window.scrollY;
                 const offsetPosition = elementPosition - headerOffset;
-                window.history.replaceState(null, '', `${import.meta.env.BASE_URL}${hash}`);
+                window.history.pushState(null, '', `${import.meta.env.BASE_URL}${hash}`);
                 window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 setActiveLink(hash as string);
+                // Закрываем мобильное меню если открыто
+                if (mobileToggle && navList) {
+                    mobileToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                }
             }
         });
     });
