@@ -363,34 +363,34 @@ html, body {
 /* Мобильная версия для секций с фотками - перенесено в @media (max-width: 768px) */
 
 /* Шаги: нумерованный список с кружками 28x28 и вертикальной линией */
-.steps { 
-    counter-reset: step; 
-    list-style: none; 
-    padding-left: 0; 
-    margin: 0; 
+.steps {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
 }
-.steps li { 
-    display: grid; 
-    grid-template-columns: 28px 12px 1fr; /* кружок | зазор/линия | текст */
-    align-items: start; 
-    margin-top: 14px; 
-    line-height: 1.6; 
-    position: relative;
+.steps li {
+    display: grid;
+    grid-template-columns: 28px 1fr; /* кружок | текст */
+    align-items: start;
+    margin-top: 14px;
+    line-height: 1.6;
+    position: relative; /* для вертикальной линии */
 }
-.steps li::before { 
-    counter-increment: step; 
-    content: counter(step); 
-    display: inline-flex; 
-    align-items: center; 
-    justify-content: center; 
-    width: 28px; 
-    height: 28px; 
-    border-radius: 9999px; 
-    background: #6D78FF; 
-    color: #fff; 
-    font-size: 14px; 
-    line-height: 1; 
-    font-weight: 700; 
+.steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    background: #6D78FF;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
     grid-column: 1;
 }
 .steps li::after {
@@ -400,12 +400,12 @@ html, body {
     top: 28px; /* после кружка */
     bottom: -14px; /* до следующего пункта */
     width: 2px;
-    background: #e5e7eb;
-    grid-column: 2;
+    background: #e5e7eb; /* тонкая линия в гаттере */
 }
-.steps li:last-child::after {
-    display: none; /* убираем линию у последнего пункта */
-}
+.steps li:last-child::after { display: none; }
+
+/* Сброс отступов у контейнера шагов, чтобы левый край секций совпадал */
+.process-list.steps { padding-left: 0; margin-left: 0; }
 
 /* Буллет‑списки в этих секциях: унификация отступов */
 .service-types .service-list, .service-types-with-photo .service-list { padding-left: 1.25rem; }
