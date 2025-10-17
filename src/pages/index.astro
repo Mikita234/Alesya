@@ -855,7 +855,13 @@ html {
 }
 
 .no-wrap {
-    white-space: nowrap; /* запрещаем перенос для "Возможные форматы работы" */
+    white-space: nowrap; /* запрещаем перенос для "Возможные форматы работы" на десктопе */
+}
+
+@media (max-width: 768px) {
+    .no-wrap {
+        white-space: normal; /* разрешаем перенос на мобиле */
+    }
 }
 
 .section p { 
