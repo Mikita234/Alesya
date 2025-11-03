@@ -737,6 +737,62 @@ p, li{ letter-spacing:0.002em; }
     transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* Узкие десктопы и планшеты (900px - 1024px) */
+@media (min-width: 900px) and (max-width: 1024px) {
+    .nav {
+        padding: 16px 20px;
+        gap: 16px;
+    }
+    
+    .logo {
+        font-size: 18px;
+    }
+    
+    .nav-list {
+        gap: 20px;
+    }
+    
+    .nav-list a {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .btn-sm {
+        padding: 8px 14px;
+        font-size: 13px;
+        height: 36px;
+        min-height: 36px;
+    }
+}
+
+/* Планшеты в альбомной ориентации (769px - 899px) */
+@media (min-width: 769px) and (max-width: 899px) {
+    .nav {
+        padding: 14px 16px;
+        gap: 12px;
+    }
+    
+    .logo {
+        font-size: 17px;
+    }
+    
+    .nav-list {
+        gap: 16px;
+    }
+    
+    .nav-list a {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    
+    .btn-sm {
+        padding: 7px 12px;
+        font-size: 12px;
+        height: 34px;
+        min-height: 34px;
+    }
+}
+
 @media (max-width: 768px) {
     .mobile-menu-toggle {
         display: flex;
