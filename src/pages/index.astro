@@ -663,6 +663,10 @@ html {
     border-radius: 9999px;
     padding: 12px 16px;
     font-weight: 600;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Service formats */
@@ -1425,9 +1429,16 @@ html {
         font-size: 1.3rem;
     }
     
+    .important-list {
+        gap: 10px;
+    }
+    
     .important-list li {
         font-size: 0.9rem;
-        padding: 8px 12px;
+        padding: 10px 16px;
+        border-radius: 20px; /* более адаптивный радиус для мобильных */
+        width: 100%; /* элементы занимают всю ширину на мобилке */
+        min-width: 0; /* позволяет элементам сжиматься */
     }
     
     .process-list li {
