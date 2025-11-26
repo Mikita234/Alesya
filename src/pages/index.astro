@@ -195,32 +195,9 @@ const description = "Очный приём и онлайн‑консульта�
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DNNpZr-IXi3/" data-instgrm-version="14"></blockquote>
             </div>
         </div>
-        <div class="instagram-placeholder" data-instagram-fallback hidden>
-            <div class="placeholder-content">
-                <h3>Instagram-превью недоступно</h3>
-                <p>Профиль @alesyatakun открыт во внешнем виджете Instagram. Перейдите по ссылке, чтобы посмотреть свежие посты.</p>
-                <a class="instagram-btn" href="https://www.instagram.com/alesyatakun/" target="_blank" rel="noopener">Открыть Instagram</a>
-            </div>
-        </div>
         <script>
             // Instagram embed - простая загрузка
             document.addEventListener('DOMContentLoaded', function () {
-                const instagramSection = document.querySelector('.instagram-section');
-                if (!instagramSection) return;
-                const botPattern = /(Googlebot|Google-InspectionTool|GoogleOther|bingbot|YandexBot|DuckDuckBot|Baiduspider|SemrushBot)/i;
-                const isCrawler = typeof navigator !== 'undefined' && botPattern.test(navigator.userAgent);
-                const posts = instagramSection.querySelector('.instagram-posts');
-                const fallback = instagramSection.querySelector('[data-instagram-fallback]');
-
-                if (isCrawler) {
-                    if (posts) posts.setAttribute('hidden', 'true');
-                    if (fallback) fallback.removeAttribute('hidden');
-                    return;
-                }
-
-                if (fallback) fallback.setAttribute('hidden', 'true');
-                if (posts) posts.removeAttribute('hidden');
-
                 if (!window.instgrm && !document.querySelector('script[src*="instagram.com/embed.js"]')) {
                     const s = document.createElement('script');
                     s.async = true;
@@ -1969,48 +1946,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	order: 2;
 }
 
-.instagram-placeholder {
-	background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-	border-radius: 12px;
-	padding: 40px 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	min-height: 400px;
-	border: 2px solid #e1e8ed;
-}
-
-.placeholder-content {
-	text-align: center;
-}
-
-.placeholder-content h3 {
-	color: var(--text);
-	font-size: 1.3rem;
-	margin: 16px 0 8px 0;
-}
-
-.placeholder-content p {
-	color: var(--text-light);
-	margin-bottom: 24px;
-}
-
-.instagram-btn {
-	background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
-	color: white;
-	padding: 12px 24px;
-	border-radius: 8px;
-	text-decoration: none;
-	font-weight: 600;
-	transition: transform 0.2s ease;
-	display: inline-block;
-}
-
-.instagram-btn:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
-}
-
     @media (max-width: 768px) {
     	.instagram-posts {
     		grid-template-columns: 1fr;
@@ -2027,11 +1962,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     	.instagram-post.center {
     		order: 0;
-    	}
-    
-    	.instagram-placeholder {
-    		min-height: 280px;
-    		padding: 24px 12px;
     	}
     }
 </style>
