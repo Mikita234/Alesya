@@ -195,10 +195,32 @@ const description = "Очный приём и онлайн‑консульта�
                 <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DNNpZr-IXi3/" data-instgrm-version="14"></blockquote>
             </div>
         </div>
+        <div class="instagram-placeholder" data-instagram-fallback hidden>
+            <div class="placeholder-content">
+                <h3>Instagram-превью недоступно</h3>
+                <p>Профиль @alesyatakun открыт во внешнем виджете Instagram. Перейдите по ссылке, чтобы посмотреть свежие посты.</p>
+                <a class="instagram-btn" href="https://www.instagram.com/alesyatakun/" target="_blank" rel="noopener">Открыть Instagram</a>
+            </div>
+        </div>
         <script>
             // Instagram embed - простая загрузка
             document.addEventListener('DOMContentLoaded', function () {
-                // Загружаем скрипт сразу, без ленивой загрузки
+                const instagramSection = document.querySelector('.instagram-section');
+                if (!instagramSection) return;
+                const botPattern = /(Googlebot|Google-InspectionTool|GoogleOther|bingbot|YandexBot|DuckDuckBot|Baiduspider|SemrushBot)/i;
+                const isCrawler = typeof navigator !== 'undefined' && botPattern.test(navigator.userAgent);
+                const posts = instagramSection.querySelector('.instagram-posts');
+                const fallback = instagramSection.querySelector('[data-instagram-fallback]');
+
+                if (isCrawler) {
+                    if (posts) posts.setAttribute('hidden', 'true');
+                    if (fallback) fallback.removeAttribute('hidden');
+                    return;
+                }
+
+                if (fallback) fallback.setAttribute('hidden', 'true');
+                if (posts) posts.removeAttribute('hidden');
+
                 if (!window.instgrm && !document.querySelector('script[src*="instagram.com/embed.js"]')) {
                     const s = document.createElement('script');
                     s.async = true;

@@ -1,5 +1,194 @@
 ---
 import '../styles/index.css';
+
+const requestOrigin = Astro.request?.url ? new URL(Astro.request.url).origin : null;
+const SITE_ORIGIN = requestOrigin ?? Astro.site?.origin ?? 'https://alesyatakun.by';
+const basePath = import.meta.env.BASE_URL ?? '/';
+const canonicalUrl = new URL(basePath, SITE_ORIGIN).toString();
+const assetUrl = (path = '') => new URL(path, SITE_ORIGIN).toString();
+
+const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Алеся Такун',
+    jobTitle: 'Психолог, гештальт-консультант',
+    description: 'Психолог, специалист по травме привязанности и нарциссической травме',
+    url: canonicalUrl,
+    image: assetUrl('photo1.jpg'),
+    telephone: '+375293078342',
+    email: 'alessia-sia@mail.ru',
+    address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'BY',
+        addressRegion: 'Гомельская область',
+        addressLocality: 'Сосновый Бор',
+    },
+    knowsAbout: [
+        'Гештальт-терапия',
+        'Травма привязанности',
+        'Нарциссическая травма',
+        'КПТСР',
+        'Эмоциональное выгорание',
+    ],
+    offers: [
+        {
+            '@type': 'Offer',
+            name: 'Индивидуальная консультация',
+            description: 'Очный приём психолога в Минске',
+            price: '120',
+            priceCurrency: 'BYN',
+            availability: 'https://schema.org/InStock',
+            validFrom: '2025-01-01',
+            category: 'Психологические услуги',
+        },
+        {
+            '@type': 'Offer',
+            name: 'Онлайн-консультация',
+            description: 'Онлайн-сессия с психологом',
+            price: '120',
+            priceCurrency: 'BYN',
+            availability: 'https://schema.org/InStock',
+            validFrom: '2025-01-01',
+            category: 'Психологические услуги',
+        },
+        {
+            '@type': 'Offer',
+            name: 'Психологические группы',
+            description: 'Групповые психологические встречи',
+            price: '100',
+            priceCurrency: 'BYN',
+            availability: 'https://schema.org/InStock',
+            validFrom: '2025-01-01',
+            category: 'Психологические услуги',
+        },
+    ],
+};
+
+const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    legalName: 'ИП Такун Алеся Александровна',
+    taxID: '491661318',
+    address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'ул. Энгельса, д. 12, кв. 15',
+        addressLocality: 'р.п. Сосновый Бор',
+        addressRegion: 'Светлогорский р-н, Гомельская обл.',
+        addressCountry: 'BY',
+    },
+    bankAccount: {
+        '@type': 'BankAccount',
+        accountNumber: 'BY80ALFA30132H53520010270000',
+        bankName: 'ЗАО «Альфа-Банк»',
+    },
+    email: 'alessia-sia@mail.ru',
+    telephone: '+375293078342',
+};
+
+const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        {
+            '@type': 'Question',
+            name: 'Сколько стоит консультация психолога?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Индивидуальная консультация и онлайн-сессия стоят 120 BYN. Психологические группы стоят 100 BYN.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'Как записаться на консультацию?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Оплатите через сайт, получите подтверждение на email, затем свяжитесь в Telegram @alesiatakun для выбора времени.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'Где проходят консультации?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Очные консультации проходят в Минске, онлайн - через Google Meet, Zoom или Telegram.',
+            },
+        },
+    ],
+};
+
+const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Главная',
+            item: 'https://alesyatakun.by/',
+        },
+        {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'Консультации',
+            item: 'https://alesyatakun.by/#services',
+        },
+        {
+            '@type': 'ListItem',
+            position: 3,
+            name: 'Оплата',
+            item: 'https://alesyatakun.by/#payments',
+        },
+    ],
+};
+
+const localBusinessSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Алеся Такун - Психолог',
+    description: 'Психолог, гештальт-консультант в Минске. Индивидуальные консультации и психологические группы.',
+    url: 'https://alesyatakun.by',
+    telephone: '+375293078342',
+    email: 'alessia-sia@mail.ru',
+    address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'BY',
+        addressRegion: 'Минск',
+        addressLocality: 'Минск',
+    },
+    geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '53.9006',
+        longitude: '27.5590',
+    },
+    openingHours: 'Mo-Fr 09:00-20:00',
+    priceRange: '100-120 BYN',
+    serviceArea: {
+        '@type': 'City',
+        name: 'Минск',
+    },
+    hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Психологические услуги',
+        itemListElement: [
+            {
+                '@type': 'Offer',
+                itemOffered: {
+                    '@type': 'Service',
+                    name: 'Индивидуальная консультация',
+                    description: 'Очный приём психолога',
+                },
+            },
+            {
+                '@type': 'Offer',
+                itemOffered: {
+                    '@type': 'Service',
+                    name: 'Онлайн-консультация',
+                    description: 'Онлайн-сессия с психологом',
+                },
+            },
+        ],
+    },
+};
 ---
 <!doctype html>
 <html lang="ru">
@@ -12,9 +201,9 @@ import '../styles/index.css';
         <meta name="description" content={Astro.props.description || "Алеся Такун — психолог, гештальт-консультант. Очный приём и онлайн‑консультации. Помощь при КПТСР, эмоциональном выгорании, сложных отношениях, травме привязанности. Запись: +375 29 307 83 42"} />
         <meta name="keywords" content="психолог Минск, гештальт-терапевт, психолог онлайн, КПТСР, эмоциональное выгорание, травма привязанности, нарциссическая травма, психолог Беларусь" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://alesyatakun.by${import.meta.env.BASE_URL}`} />
-        <link rel="alternate" hreflang="ru" href={`https://alesyatakun.by${import.meta.env.BASE_URL}`} />
-        <link rel="alternate" hreflang="ru-BY" href={`https://alesyatakun.by${import.meta.env.BASE_URL}`} />
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="alternate" hreflang="ru" href={canonicalUrl} />
+        <link rel="alternate" hreflang="ru-BY" href={canonicalUrl} />
         <meta name="author" content="Алеся Такун" />
         <meta name="geo.region" content="BY" />
         <meta name="geo.placename" content="Минск" />
@@ -30,7 +219,7 @@ import '../styles/index.css';
         <meta property="og:title" content="Алеся Такун — психолог, гештальт-консультант" />
         <meta property="og:description" content="Очный приём и онлайн. Помощь при КПТСР, выгорании, сложных отношениях." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://alesyatakun.by${import.meta.env.BASE_URL}`} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://alesyatakun.by/telegram-cover.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -46,199 +235,15 @@ import '../styles/index.css';
         <meta name="twitter:image:alt" content="Алеся Такун — психолог, гештальт-консультант" />
         
         <!-- Structured Data -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Алеся Такун",
-          "jobTitle": "Психолог, гештальт-консультант",
-          "description": "Психолог, специалист по травме привязанности и нарциссической травме",
-            "url": `https://alesyatakun.by${import.meta.env.BASE_URL}`,
-            "image": `https://alesyatakun.by${import.meta.env.BASE_URL}photo1.jpg`,
-          "telephone": "+375293078342",
-          "email": "alessia-sia@mail.ru",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "BY",
-            "addressRegion": "Гомельская область",
-            "addressLocality": "Сосновый Бор"
-          },
-          "knowsAbout": [
-            "Гештальт-терапия",
-            "Травма привязанности", 
-            "Нарциссическая травма",
-            "КПТСР",
-            "Эмоциональное выгорание",
-            
-          ],
-          "offers": [
-            {
-              "@type": "Offer",
-              "name": "Индивидуальная консультация",
-              "description": "Очный приём психолога в Минске",
-              "price": "120",
-              "priceCurrency": "BYN",
-              "availability": "https://schema.org/InStock",
-              "validFrom": "2025-01-01",
-              "category": "Психологические услуги"
-            },
-            {
-              "@type": "Offer", 
-              "name": "Онлайн-консультация",
-              "description": "Онлайн-сессия с психологом",
-              "price": "120",
-              "priceCurrency": "BYN",
-              "availability": "https://schema.org/InStock",
-              "validFrom": "2025-01-01",
-              "category": "Психологические услуги"
-            },
-            {
-              "@type": "Offer",
-              "name": "Психологические группы",
-              "description": "Групповые психологические встречи",
-              "price": "100",
-              "priceCurrency": "BYN",
-              "availability": "https://schema.org/InStock",
-              "validFrom": "2025-01-01",
-              "category": "Психологические услуги"
-            }
-          ]
-        }
-        </script>
+        <script type="application/ld+json" set:html={JSON.stringify(personSchema, null, 2)} />
         
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "legalName": "ИП Такун Алеся Александровна",
-          "taxID": "491661318",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "ул. Энгельса, д. 12, кв. 15",
-            "addressLocality": "р.п. Сосновый Бор",
-            "addressRegion": "Светлогорский р-н, Гомельская обл.",
-            "addressCountry": "BY"
-          },
-          "bankAccount": {
-            "@type": "BankAccount",
-            "accountNumber": "BY80ALFA30132H53520010270000",
-            "bankName": "ЗАО «Альфа-Банк»"
-          },
-          "email": "alessia-sia@mail.ru",
-          "telephone": "+375293078342"
-        }
-        </script>
+        <script type="application/ld+json" set:html={JSON.stringify(organizationSchema, null, 2)} />
         
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Сколько стоит консультация психолога?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Индивидуальная консультация и онлайн-сессия стоят 120 BYN. Психологические группы стоят 100 BYN."
-              }
-            },
-            {
-              "@type": "Question", 
-              "name": "Как записаться на консультацию?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Оплатите через сайт, получите подтверждение на email, затем свяжитесь в Telegram @alesiatakun для выбора времени."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Где проходят консультации?",
-              "acceptedAnswer": {
-                "@type": "Answer", 
-                "text": "Очные консультации проходят в Минске, онлайн - через Google Meet, Zoom или Telegram."
-              }
-            }
-          ]
-        }
-        </script>
+        <script type="application/ld+json" set:html={JSON.stringify(faqSchema, null, 2)} />
         
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Главная",
-              "item": "https://alesyatakun.by/"
-            },
-            {
-              "@type": "ListItem", 
-              "position": 2,
-              "name": "Консультации",
-              "item": "https://alesyatakun.by/#services"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3, 
-              "name": "Оплата",
-              "item": "https://alesyatakun.by/#payments"
-            }
-          ]
-        }
-        </script>
+        <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema, null, 2)} />
         
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Алеся Такун - Психолог",
-          "description": "Психолог, гештальт-консультант в Минске. Индивидуальные консультации и психологические группы.",
-          "url": "https://alesyatakun.by",
-          "telephone": "+375293078342",
-          "email": "alessia-sia@mail.ru",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "BY",
-            "addressRegion": "Минск",
-            "addressLocality": "Минск"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": "53.9006",
-            "longitude": "27.5590"
-          },
-          "openingHours": "Mo-Fr 09:00-20:00",
-          "priceRange": "100-120 BYN",
-          "serviceArea": {
-            "@type": "City",
-            "name": "Минск"
-          },
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Психологические услуги",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Индивидуальная консультация",
-                  "description": "Очный приём психолога"
-                }
-              },
-              {
-                "@type": "Offer", 
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Онлайн-консультация",
-                  "description": "Онлайн-сессия с психологом"
-                }
-              }
-            ]
-          }
-        }
-        </script>
+        <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema, null, 2)} />
         
         
         
@@ -367,8 +372,8 @@ import '../styles/index.css';
             <h4>Мы принимаем к оплате:</h4>
             <div class="payment-icons">
                 <div class="payment-logo-container">
-                    <img src="/payment-logos.png" alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт Интернет-Пароль, Альфа-Банк, Apple Pay, Samsung Pay" height="80" class="payment-logo-black" />
-                    <img src="/payment-logos-white.png" alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт Интернет-Пароль, Альфа-Банк, Apple Pay, Samsung Pay" height="80" class="payment-logo-white" />
+                    <img src={`${import.meta.env.BASE_URL}payment-logos.png`} alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт Интернет-Пароль, Альфа-Банк, Apple Pay, Samsung Pay" height="80" class="payment-logo-black" />
+                    <img src={`${import.meta.env.BASE_URL}payment-logos-white.png`} alt="Visa, Visa Secure, Mastercard, Mastercard ID Check, Белкарт, Белкарт Интернет-Пароль, Альфа-Банк, Apple Pay, Samsung Pay" height="80" class="payment-logo-white" />
                 </div>
             </div>
         </div>
