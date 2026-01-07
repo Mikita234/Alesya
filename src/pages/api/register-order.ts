@@ -1,5 +1,6 @@
 // Astro API route
 import type { APIContext } from 'astro';
+import { paymentConfig } from '../../config/payment.js';
 
 export const prerender = false;
 
@@ -65,9 +66,9 @@ export async function POST({ request }: APIContext) {
       });
     }
 
-    // Читаем креды из ENV (на проде обязателены)
-    const ALFA_API_LOGIN = process.env.ALFA_API_LOGIN;
-    const ALFA_API_PASSWORD = process.env.ALFA_API_PASSWORD;
+    // Читаем креды из ENV (приоритет) или из конфига (fallback для локальной разработки)
+    const ALFA_API_LOGIN = process.env.ALFA_API_LOGIN || paymentConfig.api.username;
+    const ALFA_API_PASSWORD = process.env.ALFA_API_PASSWORD || paymentConfig.api.password;
 
     if (!ALFA_API_LOGIN || !ALFA_API_PASSWORD) {
       return new Response(JSON.stringify({ success: false, error: 'Bank credentials not configured' }), {
