@@ -1,5 +1,6 @@
 ---
 import '../styles/index.css';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 const requestOrigin = Astro.request?.url ? new URL(Astro.request.url).origin : null;
 const SITE_ORIGIN = requestOrigin ?? Astro.site?.origin ?? 'https://alesyatakun.by';
@@ -198,7 +199,7 @@ const localBusinessSchema = {
         <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
         <meta name="generator" content={Astro.generator} />
         <title>{Astro.props.title || "Алеся Такун - психолог, гештальт-консультант"}</title>
-        <meta name="description" content={Astro.props.description || "Алеся Такун — психолог, гештальт-консультант. Очный приём и онлайн‑консультации. Помощь при КПТСР, эмоциональном выгорании, сложных отношениях, травме привязанности. Запись: +375 29 307 83 42"} />
+        <meta name="description" content={Astro.props.description || "Алеся Такун — ��сихолог, гештальт-консультант. Оч��ый приём и онлайн‑консультации. Помощь при КПТСР, эмоциональном выгорании, сложных отношениях, травме привязанности. Запись: +375 29 307 83 42"} />
         <meta name="keywords" content="психолог Минск, гештальт-терапевт, психолог онлайн, КПТСР, эмоциональное выгорание, травма привязанности, нарциссическая травма, психолог Беларусь" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={canonicalUrl} />
@@ -383,6 +384,7 @@ const localBusinessSchema = {
             <p><a href={`${import.meta.env.BASE_URL}oferta/`}>Договор оферты</a> · <a href={`${import.meta.env.BASE_URL}privacy/`}>Политика конфиденциальности</a></p>
         </div>
     </footer>
+    <SpeedInsights />
     </body>
 </html>
 
