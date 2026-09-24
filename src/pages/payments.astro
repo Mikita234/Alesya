@@ -1,13 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const title = "Оплата консультаций | Алеся Такун";
-const description = "Оплата консультаций психолога Алеси Такун. Очный приём и онлайн‑консультации. Банковские карты и перевод. Подтверждение в Telegram @alesiatakun";
+const title = "Запись и оплата | Алеся Такун";
+const description = "Сначала договорённость в Telegram @alesiatakun, затем оплата консультации. Очный приём и онлайн. Карты и перевод.";
 ---
 
 <Layout title={title} description={description}>
-	<h1>Оплата</h1>
-	
+	<h1>Запись и оплата</h1>
+
+	<div class="process-info">
+		<h2>Как записаться</h2>
+		<p>Сначала договорённость, потом оплата. Я не со всеми запросами работаю.</p>
+		<ol class="process-list steps">
+			<li><span>Напишите мне в Telegram <a href="https://t.me/alesiatakun" target="_blank">@alesiatakun</a></span></li>
+			<li>Договоримся о запросе и времени</li>
+			<li>Оплатите через сайт или переводом</li>
+			<li>Чек придёт на email. Если платили переводом — пришлите подтверждение в Telegram</li>
+			<li>Встреча онлайн или офлайн</li>
+		</ol>
+		<a class="btn btn-primary" href="https://t.me/alesiatakun" target="_blank">Написать в Telegram</a>
+	</div>
+
 	<div class="service-info">
 		<h2>Форматы встреч</h2>
 		<ul>
@@ -16,26 +29,10 @@ const description = "Оплата консультаций психолога А
 			<li>Психологические группы (180 мин, по расписанию).</li>
 		</ul>
 	</div>
-	
-	<div class="process-info">
-		<h2>Как записаться</h2>
-		<ol>
-			<li>Вы оплачиваете через сайт (Visa/MasterCard/Белкарт, Apple Pay; поддерживаются 3-D Secure и Белкарт-Интернет-Пароль).</li>
-			<li>Получаете подтверждение на e-mail.</li>
-			<li>Связываетесь со мной в телеграм @alesiatakun для выбора времени (или дождитесь предложения времени).</li>
-			<li>Проведение встречи онлайн (Google Meet/Zoom/Telegram) или офлайн по договорённости.</li>
-		</ol>
-	</div>
-	
-	<div class="payment-security">
-		<p>Оплата через ЗАО «Альфа-Банк», данные карты вводятся на защищённой странице банка, поддержка 3-D Secure/Белкарт-Интернет-Пароль.</p>
-	</div>
-	
-<p>Выберите удобную для вас сумму и способ оплаты. После оплаты отправьте подтверждение в Telegram: <a href="https://t.me/alesiatakun" target="_blank">@alesiatakun</a></p>
 
 	<div class="payment-main">
         <h2>Свободный платёж</h2>
-		<p>Введите любую сумму, которая вам подходит. Стандартная стоимость консультации - 130 BYN</p>
+		<p>Для тех, с кем время уже согласовано. Стандартная стоимость консультации — 130 BYN</p>
 		
 		<form class="free-payment" id="payment-form">
             <div class="amount-input">
@@ -50,6 +47,7 @@ const description = "Оплата консультаций психолога А
 				</label>
 			</div>
 			<button class="btn btn-large" type="submit">Оплатить</button>
+			<p class="pay-after">Оплачивайте после того, как мы договорились о времени.</p>
 		</form>
 		
 		<div class="quick-payments">
@@ -130,6 +128,58 @@ const description = "Оплата консультаций психолога А
     line-height: 1.6;
 }
 
+.process-info .steps {
+    list-style: none;
+    padding-left: 0;
+    margin: 4px 0 20px 0;
+    counter-reset: step;
+}
+
+.process-info .steps li {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    column-gap: 12px;
+    align-items: start;
+    margin: 14px 0;
+    padding: 0;
+    position: relative;
+    color: var(--text);
+}
+
+.process-info .steps li::before {
+    counter-increment: step;
+    content: counter(step);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 9999px;
+    background: #6D78FF;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.process-info .steps li::after {
+    content: "";
+    position: absolute;
+    left: 13px;
+    top: 28px;
+    bottom: -14px;
+    width: 2px;
+    background: #e5e7eb;
+}
+
+.process-info .steps li:last-child::after {
+    display: none;
+}
+
+.process-info .btn {
+    margin-top: 4px;
+}
+
 .service-disclaimer {
     font-style: italic;
     color: var(--muted);
@@ -173,6 +223,13 @@ const description = "Оплата консультаций психолога А
     font-size: 1.1rem;
     margin: 0 0 32px 0;
     opacity: 0.9;
+}
+
+.pay-after {
+    margin: 14px 0 0 0;
+    font-size: 0.95rem;
+    font-weight: 400;
+    opacity: 0.85;
 }
 
 .free-payment {

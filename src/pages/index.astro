@@ -21,8 +21,8 @@ const description = "Очный приём и онлайн‑консульта�
             <p class="lede">Терапия - это правда местами очень болезненный и&nbsp;не&nbsp;быстрый процесс. Иногда в&nbsp;ней будут периоды, когда вам покажется, что ничего не&nbsp;происходит, а&nbsp;иногда наоборот будет подниматься слишком много чувств. И&nbsp;это нормально, и&nbsp;естественно. Наша психика так устроена - она не&nbsp;пустит в&nbsp;перемены быстрее, чем мы&nbsp;готовы. Её задача - защитить, а&nbsp;не&nbsp;сломать привычные опоры. Поэтому изменения приходят постепенно - когда становится безопаснее, спокойнее, появляется внутренний ресурс жить по-новому.</p>
 
             <div class="cta-row">
-                <a href={`${import.meta.env.BASE_URL}payments/`} class="btn btn-primary">Записаться и оплатить</a>
-                <a href="https://t.me/alesiatakun" target="_blank" class="btn btn-ghost">Связаться в Telegram</a>
+                <a href="https://t.me/alesiatakun" target="_blank" class="btn btn-primary">Записаться</a>
+                <a href={`${import.meta.env.BASE_URL}payments/`} class="btn btn-ghost">Оплатить</a>
             </div>
 		</div>
         <div class="hero-photo photo">
@@ -97,10 +97,22 @@ const description = "Очный приём и онлайн‑консульта�
 
     <section id="payments" class="section reveal">
         <h2>Стоимость и оплата</h2>
+
+        <div class="service-types reveal">
+            <h4>Как получить консультацию</h4>
+            <p>Сначала договорённость, потом оплата. Я не со всеми запросами работаю.</p>
+            <ol class="process-list steps">
+                <li><span>Напишите мне в Telegram <a href="https://t.me/alesiatakun" target="_blank">@alesiatakun</a></span></li>
+                <li>Договоримся о запросе и времени</li>
+                <li>Оплатите через сайт</li>
+                <li>Чек придёт на email</li>
+                <li>Встреча онлайн или офлайн</li>
+            </ol>
+        </div>
         
         <div class="payment-main reveal">
             <h3>Свободный платёж</h3>
-            <p>Введите сумму, которая вам подходит. Стандартная стоимость консультации - <strong>130 BYN</strong></p>
+            <p>Для тех, с кем время уже согласовано. Стандартная стоимость консультации — <strong>130 BYN</strong></p>
             
             <form class="free-payment" id="home-payment-form">
                 <div class="amount-input" id="amount-input-wrapper">
@@ -116,6 +128,7 @@ const description = "Очный приём и онлайн‑консульта�
                     </label>
                 </div>
                 <button class="btn btn-large" type="submit">Оплатить</button>
+                <p class="pay-after">Оплачивайте после того, как мы договорились о времени.</p>
             </form>
             
             <div class="quick-payments">
@@ -131,16 +144,6 @@ const description = "Очный приём и онлайн‑консульта�
             </div>
         </div>
         
-        <div class="service-types reveal">
-            <h4>Как получить консультацию</h4>
-            <ol class="process-list steps">
-                <li>Вы оплачиваете через сайт</li>
-                <li>Получаете подтверждение на e-mail</li>
-                <li>Связываетесь со мной в телеграм @alesiatakun для выбора времени (или дождитесь предложения времени)</li>
-                <li>Проведение встречи онлайн или офлайн по договорённости</li>
-            </ol>
-        </div>
-
         <div class="service-types-with-photo reveal">
             <div class="service-types-content">
                 <h4>Как записаться в группу</h4>
@@ -234,7 +237,7 @@ const description = "Очный приём и онлайн‑консульта�
 
     <!-- Floating кнопка на мобилке -->
     <div class="floating-cta">
-        <a href={`${import.meta.env.BASE_URL}payments/`} class="btn btn-primary">Записаться</a>
+        <a href="https://t.me/alesiatakun" target="_blank" class="btn btn-primary">Записаться</a>
     </div>
 
     <!-- Индикатор загрузки -->
@@ -959,6 +962,12 @@ html {
     font-weight: 500;
     text-align: left;
     line-height: 1.6;
+}
+
+.pay-after {
+    margin: 14px 0 0 0;
+    font-size: 0.95rem;
+    font-weight: 400;
 }
 
 .btn-large {
@@ -1796,7 +1805,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (status === 'success') {
         setTimeout(() => {
-            alert('✅ Оплата прошла успешно!\n\nСвяжитесь с @alesiatakun в Telegram для выбора времени консультации.');
+            alert('Оплата прошла. Чек придёт на email.\n\nЕсли время ещё не согласовано — напишите @alesiatakun в Telegram.');
         }, 500);
     } else if (status === 'cancel') {
         setTimeout(() => {

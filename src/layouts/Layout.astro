@@ -102,7 +102,7 @@ const faqSchema = {
             name: 'Как записаться на консультацию?',
             acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Оплатите через сайт, получите подтверждение на email, затем свяжитесь в Telegram @alesiatakun для выбора времени.',
+                text: 'Напишите в Telegram @alesiatakun, договоритесь о запросе и времени, затем оплатите через сайт. Чек придёт на email.',
             },
         },
         {
@@ -291,8 +291,8 @@ const localBusinessSchema = {
                         <li><a class="nav-link" href={`${import.meta.env.BASE_URL}oferta/`}>Договор</a></li>
                     </ul>
                     <div class="header-actions">
-                        <a href={`${import.meta.env.BASE_URL}payments/`} class="btn btn-primary btn-sm">Записаться</a>
-                        <a href="https://t.me/alesiatakun" target="_blank" class="btn btn-ghost btn-sm">Telegram</a>
+                        <a href="https://t.me/alesiatakun" target="_blank" class="btn btn-primary btn-sm">Записаться</a>
+                        <a href={`${import.meta.env.BASE_URL}payments/`} class="btn btn-ghost btn-sm">Оплатить</a>
                     </div>
             </nav>
         </header>
